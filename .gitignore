@@ -1,0 +1,21 @@
+
+# Created by https://www.gitignore.io/api/netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbactions.xml
+
+# me
+.gitignore
+
+# Netbeans
+/src/com/hq/jadb/
+/src/com/hq/jadb/engine/
+/src/com/hq/jadb/manager/
+/src/com/hq/apktool/
+/src/com/hq/apktool/manifest/
+/src/com/hq/apktool/arsc/
+/MobyDroid/arch/.git

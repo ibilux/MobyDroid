@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="fa" green="fa" red="fa" type="rgb"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="mButton_GoUp" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_Refresh" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_Copy" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_Paste" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_MakeDirectory" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_MakeFile" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_Delete" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mButton_Rename" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jComboBox_Path" pref="384" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="jTextField_Filter" min="-2" pref="64" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane_Browser" alignment="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jTextField_Filter" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jComboBox_Path" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="mButton_Refresh" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="mButton_Copy" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="mButton_Paste" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="mButton_Delete" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="mButton_Rename" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="mButton_MakeDirectory" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="mButton_MakeFile" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane_Browser" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="mButton_GoUp" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="184" pref="184" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane_Browser">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fa" green="fa" red="fa" type="rgb"/>
+        </Property>
+        <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new PopUpDemo()" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable_Browser">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fa" green="fa" red="fa" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="fileTableModel" type="code"/>
+            </Property>
+            <Property name="autoResizeMode" type="int" value="0"/>
+            <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new PopUpDemo()" type="code"/>
+            </Property>
+            <Property name="showHorizontalLines" type="boolean" value="false"/>
+            <Property name="showVerticalLines" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTable_BrowserFocusGained"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_BrowserMouseClicked"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable_BrowserKeyTyped"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable_BrowserKeyReleased"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(fileTableModel){&#xa;&#xa;    @Override&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {&#xa;        Component component = super.prepareRenderer(renderer, row, column);&#xa;        if (isRowSelected(row)) {&#xa;            component.setBackground(MaterialColor.BLUE_100);&#xa;        }else{&#xa;            component.setBackground(row % 2 == 0 ? MaterialColor.WHITE : MaterialColor.GREY_50);&#xa;        }&#xa;        return component;&#xa;    }&#xa;&#xa;    @Override&#xa;    public boolean getScrollableTracksViewportWidth() {&#xa;        return getPreferredSize().width &lt; getParent().getWidth();&#xa;    }&#xa;}&#xa;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="jTextField_Filter">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[64, 2147483647]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[4, 24]"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox_Path">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fa" green="fa" red="fa" type="rgb"/>
+        </Property>
+        <Property name="editable" type="boolean" value="true"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="11" style="1"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="autoscrolls" type="boolean" value="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_GoUp">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Go Up"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;goUpHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.ARROW_UPWARD" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_Refresh">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Refresh"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;refreshHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.REFRESH" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_Copy">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Copy"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;copyHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.CONTENT_COPY" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_Paste">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Paste"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;pasteHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.CONTENT_PASTE" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_MakeDirectory">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="New Directory"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;mkdirHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.CREATE_NEW_FOLDER" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_MakeFile">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="New File"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;mkfileHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.NOTE_ADD" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_Delete">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Delete"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;deleteHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.DELETE" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonIconV" name="mButton_Rename">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Rename"/>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;renameHandle();&#xa;}&#xa;}" type="code"/>
+        </Property>
+        <Property name="alignmentX" type="float" value="0.0"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.EDIT" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
