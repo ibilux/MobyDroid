@@ -1,2 +1,18 @@
-/src/com/hq/apktool/
+
+# Created by https://www.gitignore.io/api/netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbactions.xml
+
+# me
+MobyDroid.log
+
+# Netbeans
 /src/com/hq/jadb/
+/src/com/hq/apktool/manifest/
+/src/com/hq/apktool/arsc/
+/src/com/hq/apktool/
