@@ -15,6 +15,6 @@ public class MobydroidStatic {
     public static final String SETTINGS_PATH = MOBY_DATA_PATH + "Settings.xml";
     public static final String LOG_PATH = MOBY_DATA_PATH + "MobyDroid.log";
     public static final String MOBY_DEVICE_TEMP_PATH = "/data/local/tmp/modydroid/";
-    //public static final String MOBY_JAR_PATH = new File(MobyDroid.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
-    public static final String MOBY_JAR_PATH = "/home/hq/Desktop/tmp/aapt";
+    public static final String MOBY_JAR_PATH = new File(MobyDroid.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
+    //public static final String MOBY_JAR_PATH = "/home/hq/Desktop/tmp/aapt";
 }
