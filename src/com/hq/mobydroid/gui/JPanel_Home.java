@@ -36,6 +36,8 @@ public class JPanel_Home extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel_AndroIcon = new javax.swing.JLabel();
+        jLabel_About = new javax.swing.JLabel();
+        jLabel_About1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(250, 250, 250));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Home : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 11))); // NOI18N
@@ -45,20 +47,37 @@ public class JPanel_Home extends javax.swing.JPanel {
         jLabel_AndroIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_AndroIcon.setText(String.valueOf(MaterialIcons.ANDROID));
 
+        jLabel_About.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_About.setText("Bilux (i.bilux@gmail.com)");
+
+        jLabel_About1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel_About1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_About1.setText("https://github.com/ibilux/MobyDroid/");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel_AndroIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+            .addComponent(jLabel_About, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel_About1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_AndroIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel_AndroIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_About)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_About1)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel_About;
+    private javax.swing.JLabel jLabel_About1;
     private javax.swing.JLabel jLabel_AndroIcon;
     // End of variables declaration//GEN-END:variables
 }
