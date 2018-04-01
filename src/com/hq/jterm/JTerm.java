@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author bilux (i.bilux@gmail.com)
+ * @author Bilux (i.bilux@gmail.com)
  */
 public class JTerm {
 
