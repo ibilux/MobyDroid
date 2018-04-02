@@ -24,7 +24,7 @@ So i decided to make a simple Apk installer with a graphical user interface.
 And something lead to another.
 And i wanted to share it for any one haveing the same problem.
 
-So here is it !
+So here it is !
 
 
 ## Download ##
