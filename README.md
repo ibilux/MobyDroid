@@ -16,8 +16,7 @@ java -jar "mobydroid.jar"
 ```
 
 ### Motives ###
-I have been running linux from while now.  
-and what I noticed is there is no GUI Android Devices Manager until now (QtADB didn't work for me).  
+I have been running linux from while now. And what I noticed is there is no GUI Android Devices Manager until now (QtADB didn't work for me).  
 So basicly I kept using ADB command line and kept waiting for someone to make something or some alternatives.  
 So some day a friend of mine kept complaining about the same problem.  
 So I decided to make a simple Apk installer with a graphical user interface.  
