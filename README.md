@@ -1,6 +1,6 @@
 # MobyDroid
 
-MobyDroid is a simple and cross-platform Android Devices Manager.
+MobyDroid is a simple and cross-platform Android Devices Manager.  
 It runs on any operating system with Java support (Mac OS X, Windows, Linux, BSD, Solaris...).
 
 THIS IS JUST A BETA RELEASE !
@@ -16,13 +16,13 @@ java -jar "mobydroid.jar"
 ```
 
 ### Motives ###
-I have been running linux from while now.
-and what i noticed is there is no GUI Android Devices Manager until now (QtADB didn't work for me).
-So basicly I kept using ADB command line and kept waiting for someone to make something or some alternatives.
-So some day a friend of mine kept complaining about the same problem.
-So i decided to make a simple Apk installer with a graphical user interface.
-And something lead to another.
-And i wanted to share it for any one haveing the same problem.
+I have been running linux from while now.  
+and what I noticed is there is no GUI Android Devices Manager until now (QtADB didn't work for me).  
+So basicly I kept using ADB command line and kept waiting for someone to make something or some alternatives.  
+So some day a friend of mine kept complaining about the same problem.  
+So I decided to make a simple Apk installer with a graphical user interface.  
+And something lead to another.  
+And I wanted to share it for any one haveing the same problem.
 
 So here it is !
 
@@ -37,9 +37,9 @@ So here it is !
 
 ## BETA ##
 
-THIS IS JUST A BETA RELEASE !
-So you should expect a ton of bugs or crash issues.
-Supporting _MobyDroid with issue reports, and great ideas.
+THIS IS JUST A BETA RELEASE !  
+So you should expect a ton of bugs or crash issues.  
+Supporting _MobyDroid with issue reports, and great ideas.  
 if you encounter an issue or have agreat ideas please file an issue on [issues](https://github.com/ibilux/MobyDroid/issues).
 
 
@@ -68,9 +68,9 @@ The description for the protocol for transfering files can be found here: [SYNC.
 
 
 ## Contributing ##
-This project would not be where it is, if it where not for the helpful [contributors](https://github.com/ibilux/MobyDroid/graphs/contributors).
-Supporting _MobyDroid with issue reports, and great ideas.
-The original author and all users of this project are very greatful for your contribution to this Open Source Project.
+This project would not be where it is, if it where not for the helpful [contributors](https://github.com/ibilux/MobyDroid/graphs/contributors).  
+Supporting _MobyDroid with issue reports, and great ideas.  
+The original author and all users of this project are very greatful for your contribution to this Open Source Project.  
 
 
 ## Authors ##
