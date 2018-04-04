@@ -23,6 +23,14 @@ And I wanted to share it for any one having the same problem.
 
 So here it is !
 
+## Install ##
+| Distro | Download Link |
+| - | - |
+| Arch | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
+| Debian | [mobydroid_0.1-1.deb](https://github.com/ibilux/MobyDroid/releases/download/0.1/mobydroid_0.1-1.deb) |
+| Manjaro | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
+| Ubuntu | [mobydroid_0.1-1.deb](https://github.com/ibilux/MobyDroid/releases/download/0.1/mobydroid_0.1-1.deb) |
+
 
 ## Download ##
 
@@ -36,7 +44,9 @@ So here it is !
 
 THIS IS JUST A BETA RELEASE !  
 So you should expect a ton of bugs or crash issues.  
+Please feel free to reply in this thread any comments, suggestions, questions, bug reports, ect.  
 if you encounter an issue or have a great ideas please file an issue on [issues](https://github.com/ibilux/MobyDroid/issues).
+
 
 
 ## How to Install ADB on Windows, macOS, and Linux ##
