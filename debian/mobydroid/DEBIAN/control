@@ -1,0 +1,11 @@
+Package: mobydroid
+Version: 0.1-1
+Section: base
+Priority: optional
+Architecture: all
+Depends: openjdk-8-jre | openjdk-9-jre | oracle-java8-installer | oracle-java9-installer | jarwrapper | default-jdk, android-tools
+Maintainer: Bilux <i.bilux@gmail.com>
+Homepage: https://github.com/ibilux/MobyDroid
+Installed-Size: 4449
+Description: MobyDroid
+ GUI for Android SDK/ADB, Android phone manager.

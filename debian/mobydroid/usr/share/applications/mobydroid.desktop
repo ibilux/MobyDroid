@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.1
+Name=MobyDroid
+GenericName=Android Device Manager
+Comment=Your android device manager
+Exec=/usr/bin/mobydroid
+Icon=/usr/share/mobydroid/mobydroid.png
+Terminal=false
+Type=Application
+Categories=Tool
+StartupNotify=true
