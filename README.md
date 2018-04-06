@@ -28,8 +28,10 @@ So here it is !
 | - | - |
 | Arch | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
 | Debian | [mobydroid_0.1-1.deb](https://github.com/ibilux/MobyDroid/releases/download/0.1/mobydroid_0.1-1.deb) |
+| Fedora RPM | [mobydroid-0.1-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/0.1-1/mobydroid-0.1-1.rpm) |
 | Manjaro | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
 | Ubuntu | [mobydroid_0.1-1.deb](https://github.com/ibilux/MobyDroid/releases/download/0.1/mobydroid_0.1-1.deb) |
+| RPM | [mobydroid-0.1-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/0.1-1/mobydroid-0.1-1.rpm) |
 
 
 ## Download ##
