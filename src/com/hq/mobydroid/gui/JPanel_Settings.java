@@ -33,6 +33,7 @@ public class JPanel_Settings extends javax.swing.JPanel {
     public void updateInfo() {
         // set
         jCheckBox_ExpressSettings.setSelected(Boolean.valueOf(Settings.get("Express_Settings")));
+        jCheckBox_SuRoot.setSelected(Boolean.valueOf(Settings.get("SuRoot")));
         jTextField_HomePath.setText(MobydroidStatic.MOBY_HOME_PATH);
         jTextField_LogPath.setText(MobydroidStatic.LOG_PATH);
     }
@@ -58,6 +59,9 @@ public class JPanel_Settings extends javax.swing.JPanel {
         jLabel_LogPathIcon = new javax.swing.JLabel();
         jLabel_LogPath = new javax.swing.JLabel();
         jTextField_LogPath = new javax.swing.JTextField();
+        jLabel_SuRoot = new javax.swing.JLabel();
+        jLabel_SuRootIcon = new javax.swing.JLabel();
+        jCheckBox_SuRoot = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(250, 250, 250));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Screen Capture : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 11))); // NOI18N
@@ -107,6 +111,21 @@ public class JPanel_Settings extends javax.swing.JPanel {
 
         jTextField_LogPath.setEditable(false);
 
+        jLabel_SuRoot.setForeground(new java.awt.Color(97, 97, 97));
+        jLabel_SuRoot.setText("Su Root Permission :");
+
+        jLabel_SuRootIcon.setFont(MaterialIcons.ICON_FONT.deriveFont(24f));
+        jLabel_SuRootIcon.setForeground(new java.awt.Color(97, 97, 97));
+        jLabel_SuRootIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_SuRootIcon.setText(String.valueOf(MaterialIcons.BUILD));
+
+        jCheckBox_SuRoot.setBackground(new java.awt.Color(250, 250, 250));
+        jCheckBox_SuRoot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_SuRootActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,33 +136,36 @@ public class JPanel_Settings extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_LanguageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_Language, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jComboBox_Language, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel_Language, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_LogPathIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_LogPath, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextField_LogPath, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                        .addComponent(jLabel_LogPath, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_HomePathIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_HomePath, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextField_HomePath, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                        .addComponent(jLabel_HomePath, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_ExpressSettingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_ExpressSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_ExpressSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_SuRootIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox_ExpressSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel_SuRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_HomePath, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(jTextField_LogPath, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(jCheckBox_SuRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox_ExpressSettings, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(jComboBox_Language, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel_ExpressSettingsIcon, jLabel_HomePathIcon, jLabel_LanguageIcon, jLabel_LogPathIcon});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel_ExpressSettingsIcon, jLabel_HomePathIcon, jLabel_LanguageIcon, jLabel_LogPathIcon, jLabel_SuRootIcon});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel_ExpressSettings, jLabel_HomePath, jLabel_Language, jLabel_LogPath});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel_ExpressSettings, jLabel_HomePath, jLabel_Language, jLabel_LogPath, jLabel_SuRoot});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,6 +180,11 @@ public class JPanel_Settings extends javax.swing.JPanel {
                     .addComponent(jLabel_ExpressSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_ExpressSettingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox_ExpressSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_SuRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_SuRootIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox_SuRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_HomePath, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,9 +207,25 @@ public class JPanel_Settings extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "You need to restart application for this change to take effect.", "Restart needed", JOptionPane.OK_OPTION, ResourceLoader.MaterialIcons_WARNING);
     }//GEN-LAST:event_jCheckBox_ExpressSettingsActionPerformed
 
+    private void jCheckBox_SuRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_SuRootActionPerformed
+        if (jCheckBox_SuRoot.isSelected()) {
+            // show warning
+            int result = JOptionPane.showConfirmDialog(this, "Su Root permission is dangder and for exprets only!\nAre you sure you want to activate it?", "Su Root Permission", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, ResourceLoader.MaterialIcons_WARNING);
+            if (result == JOptionPane.YES_OPTION) {
+                jCheckBox_SuRoot.setSelected(true);
+            }else{
+                jCheckBox_SuRoot.setSelected(false);
+            }
+        }
+        // save value
+        Settings.set("SuRoot", String.valueOf(jCheckBox_SuRoot.isSelected()));
+        Settings.save();
+    }//GEN-LAST:event_jCheckBox_SuRootActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox_ExpressSettings;
+    private javax.swing.JCheckBox jCheckBox_SuRoot;
     private javax.swing.JComboBox<String> jComboBox_Language;
     private javax.swing.JLabel jLabel_ExpressSettings;
     private javax.swing.JLabel jLabel_ExpressSettingsIcon;
@@ -192,6 +235,8 @@ public class JPanel_Settings extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_LanguageIcon;
     private javax.swing.JLabel jLabel_LogPath;
     private javax.swing.JLabel jLabel_LogPathIcon;
+    private javax.swing.JLabel jLabel_SuRoot;
+    private javax.swing.JLabel jLabel_SuRootIcon;
     private javax.swing.JTextField jTextField_HomePath;
     private javax.swing.JTextField jTextField_LogPath;
     // End of variables declaration//GEN-END:variables

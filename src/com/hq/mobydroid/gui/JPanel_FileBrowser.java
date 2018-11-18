@@ -314,6 +314,10 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
         }
         fileBrowserAbstract.rename(file.getPath(), file.resolveName(input.toString()));
     }
+    
+    private void surootHandle() {
+        
+    }
 
     private boolean isFileSelected() {
         if (jTable_Browser.getSelectedRowCount() == 0) {
