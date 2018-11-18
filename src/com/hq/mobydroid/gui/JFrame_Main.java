@@ -109,7 +109,7 @@ public class JFrame_Main extends javax.swing.JFrame {
 
         // add home panel
         homeHandle();
-        
+
         // hide for non expert
         if (!Boolean.valueOf(Settings.get("Express_Settings"))) {
             jButton_Terminal.setVisible(false);
@@ -187,7 +187,15 @@ public class JFrame_Main extends javax.swing.JFrame {
                 String deviceName;
                 try {
                     JadbDeviceProperties jadbDeviceProperties = jadbdevice.getDeviceProperties();
-                    deviceName = "<html><b>" + jadbDeviceProperties.getProductManufacturer() + "</b><br>" + jadbDeviceProperties.getProductModel().substring(0, 20) + "</html>";
+                    deviceName = "<html><b>";
+                    deviceName += jadbDeviceProperties.getProductManufacturer();
+                    deviceName += "</b><br>";
+                    if (jadbDeviceProperties.getProductModel().length() > 20) {
+                        deviceName += jadbDeviceProperties.getProductModel().substring(0, 20);
+                    }else{
+                        deviceName += jadbDeviceProperties.getProductModel();
+                    }
+                    deviceName += "</html>";
                 } catch (IOException | JadbException ex) {
                     deviceName = jadbdevice.getSerial() + " (Unknown)";
                     Log.log(Level.SEVERE, "GetDeviceProperties", ex);
@@ -273,7 +281,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler.add(jComponent);
         //pack();
         jPanel_MainHandler.setVisible(true);
-        
+
     }
 
     /**
