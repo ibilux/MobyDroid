@@ -1,24 +1,24 @@
 1. Decide on the name of your package. Standard debian notation is all lowercase in the following format:
     <project>_<major version>.<minor version>-<package revision>
 For example, you could name your first package...
-    mobydroid_1.0-1
+    mobydroid_0.2-1
 
 2. Create a directory to make your package in. The name should be the same as the package name.
-    mkdir mobydroid_1.0-1
+    mkdir mobydroid_0.2-1
 
 3. Pretend that the packaging directory is actually the root of the file system. Put the files of your program where they would be installed to on a system.
-    mkdir mobydroid_1.0-1/usr
-    mkdir mobydroid_1.0-1/usr/local
-    mkdir mobydroid_1.0-1/usr/local/bin
-    cp "~/Projects/MobyDroid" mobydroid_1.0-1/usr/local/bin
+    mkdir mobydroid_0.2-1/usr
+    mkdir mobydroid_0.2-1/usr/local
+    mkdir mobydroid_0.2-1/usr/local/bin
+    cp "~/Projects/MobyDroid" mobydroid_0.2-1/usr/local/bin
 
 4. Now create a special metadata file with which the package manager will install your program...
-    mkdir mobydroid_1.0-1/DEBIAN
-    gedit mobydroid_1.0-1/DEBIAN/control
+    mkdir mobydroid_0.2-1/DEBIAN
+    gedit mobydroid_0.2-1/DEBIAN/control
 
 5. Put something like this in that file...
     Package: mobydroid
-    Version: 1.0-1
+    Version: 0.2-1
     Section: base
     Priority: optional
     Architecture: all
@@ -32,6 +32,6 @@ For example, you could name your first package...
      (the space before each line in the description is important)
 
 6. Now you just need to make the package:
-    dpkg-deb --build mobydroid_1.0-1
+    dpkg-deb --build mobydroid_0.2-1
 
 

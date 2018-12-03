@@ -1,6 +1,6 @@
 %define _binaries_in_noarch_packages_terminate_build   0
 Name:           mobydroid
-Version:        0.1
+Version:        0.2
 Release:        1%{?dist}
 Summary:        GUI for Android SDK/ADB
 BuildArch:	noarch
@@ -49,6 +49,6 @@ install -Dm755 %{SOURCE3} %{buildroot}%{_bindir}/mobydroid
 
 
 %changelog
-* Thu Apr  5 2018 yucef sourani <youssef.m.sourani@gmail.com> 0.1-1
+* Thu Dec  5 2018 yucef sourani <youssef.m.sourani@gmail.com> 0.2-1
 - Initial For Fedora
 

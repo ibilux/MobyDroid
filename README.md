@@ -38,8 +38,8 @@ So here it is !
 
 | Type | Size | Download Link |
 | - | - | - |
-| Standalone | 2.29 MB | [MobyDroid_v0.1.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.1/MobyDroid_v0.1.zip) |
-| Jar Only | 0.22 MB | [MobyDroid_v0.1_jar.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.1/MobyDroid_v0.1_jar.zip) |
+| Standalone | 2.29 MB | [MobyDroid_v0.2.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.2/MobyDroid_v0.2.zip) |
+| Jar Only | 0.22 MB | [MobyDroid_v0.2_jar.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid.jar) |
 
 
 ## BETA ##
