@@ -27,11 +27,11 @@ So here it is !
 | Distro | Download Link |
 | - | - |
 | Arch | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
-| Debian | [mobydroid_0.1-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid_v0.2-1.deb) |
-| Fedora RPM | [mobydroid-0.1-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid-0.2-1.noarch.rpm) |
+| Debian | [mobydroid_0.2-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid_v0.2-1.deb) |
+| Fedora RPM | [mobydroid-0.2-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid-0.2-1.noarch.rpm) |
 | Manjaro | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
-| Ubuntu | [mobydroid_0.1-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid_v0.2-1.deb) |
-| RPM | [mobydroid-0.1-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid-0.2-1.noarch.rpm) |
+| Ubuntu | [mobydroid_0.2-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid_v0.2-1.deb) |
+| RPM | [mobydroid-0.2-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.2/mobydroid-0.2-1.noarch.rpm) |
 
 
 ## Download ##
