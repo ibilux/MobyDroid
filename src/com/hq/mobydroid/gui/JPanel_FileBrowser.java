@@ -57,6 +57,7 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
     private final FileBrowserAbstract fileBrowserAbstract;
     private final ComboBoxAutoComplete comboBoxAutoComplete;
     private String tableFilter;
+    private String jComboBox_Path_String;
     // *************************************************************
 
     /**
@@ -314,7 +315,7 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
                 } catch (InterruptedException ex) {
                 }*/
                 // get files list
-                List<MyFile> list = fileBrowserAbstract.goTo(path);
+                List<MyFile> list = fileBrowserAbstract.goTo(path.replace('\\', '/')); // work around path escape bug
 
                 // publish
                 list.forEach((file) -> {
@@ -338,6 +339,7 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
             protected void done() {
                 // set current path
                 jComboBox_Path.setSelectedItem(fileBrowserAbstract.getPath());
+                jComboBox_Path_String = fileBrowserAbstract.getPath();
                 // update combobox suggetion default model
                 comboBoxAutoComplete.updateDefaultModel();
                 // enable UI
@@ -664,6 +666,14 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
             }
             // get written newText
             String newText = ((JTextField) ke.getSource()).getText();
+
+            // is it really changed?
+            if (newText.equals(jComboBox_Path_String)) {
+                return;
+            } else {
+                jComboBox_Path_String = newText;
+            }
+
             // start working
             if (newText.isEmpty()) {
                 // hide popup
