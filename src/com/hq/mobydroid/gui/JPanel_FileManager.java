@@ -1,18 +1,24 @@
 package com.hq.mobydroid.gui;
 
-import com.hq.jadb.engine.JadbException;
 import com.hq.jadb.MyFile;
+import com.hq.jadb.engine.JadbException;
 import com.hq.mobydroid.Log;
 import com.hq.mobydroid.MobyDroid;
 import com.hq.mobydroid.Settings;
 import com.hq.mobydroid.device.FileBrowserAbstract;
+import com.hq.mobydroid.device.FileBrowserDevice;
 import com.hq.mobydroid.device.FileBrowserListener;
 import com.hq.mobydroid.device.FileBrowserLocal;
-import com.hq.mobydroid.device.FileBrowserDevice;
 import java.awt.Cursor;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -87,6 +93,9 @@ public class JPanel_FileManager extends javax.swing.JPanel {
         jPanel_Device.setLayout(new java.awt.BorderLayout());
         jPanel_Device.add(jPanel_FileBrowser_Device);
         jPanel_Device.setVisible(true);
+
+        // Handle drag & drop files into jPanel_Device
+        dropHandle();
     }
 
     /**
@@ -113,7 +122,7 @@ public class JPanel_FileManager extends javax.swing.JPanel {
                 if (copyFrom instanceof FileBrowserLocal) { // copy from local
                     if (copyTo instanceof FileBrowserLocal) { // to local
                         // only for expert
-                        if (Boolean.valueOf(Settings.get("Express_Settings"))) {
+                        if (Boolean.valueOf(Settings.get("Expert_Settings"))) {
                             startnCopy((srcFile, dstFile) -> {
                                 copyTo.copy(srcFile, dstFile);
                             });
@@ -130,7 +139,7 @@ public class JPanel_FileManager extends javax.swing.JPanel {
                 } else if (copyFrom instanceof FileBrowserDevice) { // copy from device
                     if (copyTo instanceof FileBrowserDevice) { // to device
                         // only for expert
-                        if (Boolean.valueOf(Settings.get("Express_Settings"))) {
+                        if (Boolean.valueOf(Settings.get("Expert_Settings"))) {
                             copyFrom.getSrc().forEach(src -> {
                                 copyTo.copy(src.getPath(), copyTo.getDst().getPath());
                             });
@@ -204,6 +213,49 @@ public class JPanel_FileManager extends javax.swing.JPanel {
                 // copy file
                 swingWorkerPublisher.copy(srcFile.getPath(), dstFile);
                 //System.out.println(srcFile.getPath() + "\t\t > " + dstFile);
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    private void dropHandle() {
+        // Handle drag & drop files into jPanel
+        jPanel_Device.setDropTarget(new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent dtde) {
+                // disable UI
+                try {
+                    // set accepted drop action
+                    dtde.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+                    // Just going to grab the expected DataFlavor to make sure
+                    // we know what is being dropped
+                    // Grab expected flavor
+                    DataFlavor dragAndDropPanelFlavor = DataFlavor.javaFileListFlavor;
+                    // What does the Transferable support
+                    if (dtde.getTransferable().isDataFlavorSupported(dragAndDropPanelFlavor)) {
+                        Object transferableArrayListObj = dtde.getTransferable().getTransferData(dragAndDropPanelFlavor);
+                        if (transferableArrayListObj != null) {
+                            if (transferableArrayListObj instanceof ArrayList) {
+                                // copyHandle
+                                List<MyFile> src = new ArrayList<>();
+                                ((ArrayList) transferableArrayListObj).forEach(file -> {
+                                    String srcFile = ((File) file).getAbsolutePath();
+                                    src.add(new MyFile(srcFile, 0, 0, 0));
+                                });
+                                // copy from local
+                                fileBrowserLocal.onCopy(src);
+                                // paste to device
+                                fileBrowserDevice.onPaste();
+                            }
+                        }
+                    }
+                } catch (UnsupportedFlavorException | IOException ex) {
+                    Log.log(Level.SEVERE, "DropItHandle", ex);
+                }
+                // handle drop inside current panel
+                //super.drop(dtde);*/
             }
         });
     }
@@ -292,7 +344,6 @@ public class JPanel_FileManager extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_Device;

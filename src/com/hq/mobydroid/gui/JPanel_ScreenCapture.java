@@ -322,7 +322,6 @@ public class JPanel_ScreenCapture extends javax.swing.JPanel {
         drawImage();
     }//GEN-LAST:event_jLabel_ScreenShotAncestorResized
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_ScreenShot;
     private com.hq.mobydroid.gui.MaterialButtonIconV mButton_Capture;

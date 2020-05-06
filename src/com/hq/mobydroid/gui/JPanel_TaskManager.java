@@ -9,6 +9,7 @@ import com.hq.materialdesign.MaterialColor;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.MobyDroid;
 import com.hq.mobydroid.device.MobydroidDevice;
+import com.hq.mobydroid.device.TaskWorker;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
@@ -22,20 +23,19 @@ import javax.swing.DefaultRowSorter;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import com.hq.mobydroid.device.TaskWorker;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 
 /**
  *
@@ -111,7 +111,7 @@ public class JPanel_TaskManager extends javax.swing.JPanel {
                 KeyboardFocusManager.getCurrentKeyboardFocusManager().focusNextComponent();
             }
         });
-        
+
         // KeyBinding
         jTable_Tasks.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "none");
         jTable_Tasks.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_HOME, 0), "none");
@@ -702,49 +702,6 @@ public class JPanel_TaskManager extends javax.swing.JPanel {
                 //KeyboardFocusManager.getCurrentKeyboardFocusManager().focusNextComponent();
                 break;
         }
-        /*
-        int input = evt.getKeyCode();
-        if(input==KeyEvent.VK_ENTER){
-            if(currentFile.type.equalsIgnoreCase("desktop") || currentFile.type.equalsIgnoreCase("computer") || currentFile.type.equalsIgnoreCase("hdd") || currentFile.type.equalsIgnoreCase("fdd") || currentFile.type.equalsIgnoreCase("cd") || currentFile.type.equalsIgnoreCase("home") || currentFile.type.equalsIgnoreCase("dir")){
-                getChildren();
-            }
-        }else if(input==KeyEvent.VK_BACK_SPACE){
-            MyFile tmpFile =((TaskTableModel)browserTable.getModel()).getFile("..");
-            if(tmpFile==null){
-                //tmpFile = new MyFile("..","dir","");
-                //currentFile = tmpFile;
-                ///getChildren();
-                getChildren(computerNode);
-            }else{
-                currentFile = tmpFile;
-                setFileDetails(currentFile);
-                getChildren();
-            }
-        }else if(input==KeyEvent.VK_HOME){
-            browserTable.changeSelection(0, 0, false, false);
-        }else if(input==KeyEvent.VK_END){
-            //browserTable.sets
-            browserTable.changeSelection(browserTable.getRowCount() - 1, 0, false, false);
-        }
-         */
- /*int startRow = jTable_Tasks.getSelectedRow();
-        if (startRow < 0) {
-            startRow = 0;
-        } else {
-            startRow++;
-        }
-        for (int row = startRow; row < jTable_Tasks.getRowCount(); row++) {
-            if (((String) jTable_Tasks.getValueAt(row, 1)).toLowerCase().startsWith("" + Character.toLowerCase(evt.getKeyChar()))) {
-                jTable_Tasks.changeSelection(row, 0, false, false);
-                return;
-            }
-        }
-        for (int row = 0; row < jTable_Tasks.getRowCount(); row++) {
-            if (((String) jTable_Tasks.getValueAt(row, 1)).toLowerCase().startsWith("" + Character.toLowerCase(evt.getKeyChar()))) {
-                jTable_Tasks.changeSelection(row, 0, false, false);
-                return;
-            }
-        }*/
     }//GEN-LAST:event_jTable_TasksKeyPressed
 
     private void jTable_TasksFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable_TasksFocusGained
@@ -753,7 +710,6 @@ public class JPanel_TaskManager extends javax.swing.JPanel {
             jTable_Tasks.setRowSelectionInterval(0, 0);
         }
     }//GEN-LAST:event_jTable_TasksFocusGained
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jTableScrollPane_Tasks;

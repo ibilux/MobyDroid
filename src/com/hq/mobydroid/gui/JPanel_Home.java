@@ -14,9 +14,7 @@ import com.hq.materialdesign.MaterialIcons;
 public class JPanel_Home extends javax.swing.JPanel {
 
     // ************************ My variable ************************
-
     // *************************************************************
-
     /**
      * Creates new form JPanel_ManageApps
      *
@@ -73,7 +71,6 @@ public class JPanel_Home extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_About;

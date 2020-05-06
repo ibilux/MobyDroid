@@ -13,6 +13,7 @@ public class JDialog_Working extends javax.swing.JDialog {
 
     /**
      * Creates new form JDialog_Working
+     *
      * @param parent
      * @param modal
      */

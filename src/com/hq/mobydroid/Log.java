@@ -11,10 +11,9 @@ import java.util.logging.Logger;
 
 /**
  * Logger.
- * 
+ *
  * @author bilux
  */
-
 public class Log {
 
     private static final Logger LOGGER = Logger.getLogger(MobyDroid.class.getName());
@@ -22,7 +21,7 @@ public class Log {
     private static final int LOG_COUNT = 1;
     private static final boolean LOG_APPEND = true;
     private static boolean logEnabled = false;
-    
+
     public static void init() {
         try {
             // Create an appending file handler

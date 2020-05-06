@@ -235,7 +235,6 @@ public class JPanel_Terminal extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane_Jterm;

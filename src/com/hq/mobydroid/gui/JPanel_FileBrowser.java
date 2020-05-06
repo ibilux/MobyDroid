@@ -7,9 +7,9 @@ package com.hq.mobydroid.gui;
 
 import com.hq.jadb.MyFile;
 import com.hq.materialdesign.MaterialColor;
-import com.hq.mobydroid.device.FileBrowserAbstract;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.Settings;
+import com.hq.mobydroid.device.FileBrowserAbstract;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.KeyboardFocusManager;
@@ -28,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -110,19 +111,6 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
 
         // Sorting by multiple columns (folders first)
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        /*
-        int columnIndexToSort = 1;
-        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
-        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
-        tableRowSorter.setSortKeys(sortKeys);
-        tableRowSorter.sort();
-         */
-
-        /*sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
-        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-        tableRowSorter.setSortKeys(sortKeys);
-        tableRowSorter.sort();
-        */
 
         // add table filter for search
         tableFilter = "";
@@ -137,28 +125,6 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
             }
         });
         jTable_Browser.setRowSorter(tableRowSorter);
-
-        /*
-        // header click event
-        jTable_Browser.getTableHeader().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                int column = jTable_Browser.convertColumnIndexToModel(jTable_Browser.getColumnModel().getColumnIndexAtX(mouseEvent.getX()));
-                if (column != -1) {
-                    //build a list of sort keys for this column, and pass it to the sorter
-                    //you can build the list to fit your needs here 
-                    //for example, you can sort on multiple columns, not just one
-                    List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-                    //cycle through all orders; sort is removed every 3rd click
-                    sortKeys.add(new RowSorter.SortKey(jTable_Browser.convertColumnIndexToModel(2), SortOrder.ASCENDING));
-                    sortKeys.add(new RowSorter.SortKey(column, SortOrder.ASCENDING));
-                    tableRowSorter.setSortKeys(sortKeys);
-                    tableRowSorter.sort();                    
-                    //jTable_Browser.getRowSorter().getSortKeys().get(column).getSortOrder()==SortOrder.ASCENDING?SortOrder.DESCENDING:SortOrder.ASCENDING;
-                }
-            }
-        });
-        */
 
         // add JTextField value Change Listener
         jTextField_Filter.getDocument().addDocumentListener(new DocumentListener() {
@@ -184,21 +150,13 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
         });
 
         // hide for non expert
-        if (!Boolean.valueOf(Settings.get("Express_Settings"))) {
+        if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             mButton_MakeDirectory.setVisible(false);
             mButton_MakeFile.setVisible(false);
             mButton_Delete.setVisible(false);
             mButton_Rename.setVisible(false);
             jTable_Browser.removeColumn(jTable_Browser.getColumnModel().getColumn(5));
         }
-
-        /*
-        jComboBox_Path.addItemListener((java.awt.event.ItemEvent evt) -> {
-            if (evt.getStateChange() == ItemEvent.SELECTED) {
-                //updateFilesList(jComboBox_Path.getSelectedItem().toString());
-            }
-        });
-         */
     }
 
     /**
@@ -314,9 +272,9 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
         }
         fileBrowserAbstract.rename(file.getPath(), file.resolveName(input.toString()));
     }
-    
+
     private void surootHandle() {
-        
+
     }
 
     private boolean isFileSelected() {
@@ -410,35 +368,24 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
     // *************************************************************
     private class PopUpDemo extends JPopupMenu {
 
-        /*
-        JMenuItem refreshMenuItem = new JMenuItem("Refresh",refreshIcon);
-        JMenuItem downloadMenuItem = new JMenuItem("Download",downloadIcon);
-        JMenuItem uploadMenuItem = new JMenuItem("Upload",uploadIcon);
-        JMenuItem runMenuItem = new JMenuItem("Run",runIcon);
-        JMenuItem renameMenuItem = new JMenuItem("Rename",renameIcon);
-        JMenuItem deleteMenuItem = new JMenuItem("Delete",deleteIcon);
-        JMenuItem mkdirMenuItem = new JMenuItem("Creat folder",folderIcon);
-        JMenuItem openAgentFolderMenuItem = new JMenuItem("Open user folder",downloadsIcon);*/
+        JMenuItem refreshMenuItem = new JMenuItem("Refresh", MaterialIcons.REFRESH);
+        JMenuItem copyMenuItem = new JMenuItem("Copy", MaterialIcons.CONTENT_COPY);
+        JMenuItem pasteMenuItem = new JMenuItem("Paste", MaterialIcons.CONTENT_PASTE);
+
         public PopUpDemo() {
-            /*
-            refreshMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {refreshCMD(evt);}});
-            downloadMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {downloadCMD(evt);}});
-            uploadMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {uploadCMD(evt);}});
-            runMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {runCMD(evt);}});
-            renameMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {renameCMD(evt);}});
-            deleteMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {deleteCMD(evt);}});
-            mkdirMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {mkdirCMD(evt);}});
-            openAgentFolderMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {openAgentFolderCMD(evt);}});
-            
+            refreshMenuItem.addActionListener((ActionEvent evt) -> {
+                refreshHandle();
+            });
+            copyMenuItem.addActionListener((ActionEvent evt) -> {
+                copyHandle();
+            });
+            pasteMenuItem.addActionListener((ActionEvent evt) -> {
+                pasteHandle();
+            });
+
             add(refreshMenuItem);
-            add(downloadMenuItem);
-            add(uploadMenuItem);
-            add(runMenuItem);
-            add(renameMenuItem);
-            add(deleteMenuItem);
-            add(mkdirMenuItem);
-            add(openAgentFolderMenuItem);
-             */
+            add(copyMenuItem);
+            add(pasteMenuItem);
         }
     }
 
@@ -1080,7 +1027,6 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_jTable_BrowserKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox_Path;

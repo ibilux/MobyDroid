@@ -104,4 +104,8 @@ public class MobyDroid {
     public static void setProgressBarString(String string) {
         jFrame_Main.setProgressBarString(string);
     }
+
+    public static void showTasksPanel() {
+        jFrame_Main.tasksHandle();
+    }
 }

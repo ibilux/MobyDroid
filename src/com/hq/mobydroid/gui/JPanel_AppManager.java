@@ -5,15 +5,16 @@
  */
 package com.hq.mobydroid.gui;
 
-import com.hq.mobydroid.device.ApkgManager;
 import com.hq.apktool.Apkg;
 import com.hq.materialdesign.MaterialColor;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.MobyDroid;
-import com.hq.mobydroid.MobydroidStatic;
 import com.hq.mobydroid.Settings;
+import com.hq.mobydroid.device.ApkgManager;
+import com.hq.mobydroid.device.TaskListener;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -29,6 +30,7 @@ import javax.swing.DefaultRowSorter;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -39,16 +41,11 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import com.hq.mobydroid.device.TaskListener;
-import java.awt.Cursor;
-import java.io.File;
-import java.util.stream.Collectors;
-import javax.swing.JFileChooser;
 
 /**
  *
@@ -131,23 +128,11 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jTable_Apps.getSelectionModel().addListSelectionListener(listSelectionListener);
 
         // hide for non expert
-        if (!Boolean.valueOf(Settings.get("Express_Settings"))) {
+        if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             materialButtonH_Backup.setVisible(false);
             materialButtonH_Restore.setVisible(false);
             jTable_Apps.removeColumn(jTable_Apps.getColumnModel().getColumn(5));
         }
-
-        //jTable_Apps.removeColumn(jTable_Apps.getColumnModel().getColumn(1));
-        //jTable_Apps.addColumn(jTable_Apps.getColumnModel().getColumn(1));
-        //setColumnWidth(2, 0, 0);
-        //jTable_Apps.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), "none");
-        /*        
-        //Number column1 = jTable_Apps.getColumnModel().getColumnIndex(1);
-        Number column2 = jTable_Apps.convertColumnIndexToModel(2);
-        jTable_Apps.getTableHeader().putClientProperty("JTableHeader.selectedColumn", column2);
-        jTable_Apps.getTableHeader().putClientProperty("JTableHeader.sortDirection", "ascending");
-        jTable_Apps.getTableHeader().resizeAndRepaint();
-         */
     }
 
     /**
@@ -155,22 +140,31 @@ public class JPanel_AppManager extends javax.swing.JPanel {
      */
     private void uninstallHandle() {
         uninstallPackages();
+
+        // show tasks progress window
+        MobyDroid.showTasksPanel();
     }
 
     private void backupHandle() {
         backupPackages();
     }
 
-    private void RestoreHandle() {
+    private void restoreHandle() {
         restorePackages();
     }
 
     private void pullHandle() {
         pullPackages();
+
+        // show tasks progress window
+        MobyDroid.showTasksPanel();
     }
 
-    private void RefreshHandle() {
+    private void refreshHandle() {
         updatePackagesList();
+
+        // show tasks progress window
+        MobyDroid.showTasksPanel();
     }
 
     private boolean isPackageMarked() {
@@ -243,55 +237,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 enableUI();
             }
         });
-        /*
-        SwingWorker<Void, Apkg> worker = new SwingWorker<Void, Apkg>() {
-            @Override
-            public Void doInBackground() {
-                // disable jTable
-                jTable_Apps.setEnabled(false);
-                // remove ListSelectionListener
-                jTable_Apps.getSelectionModel().removeListSelectionListener(listSelectionListener);
-                // get packages list
-                List<Apkg> pkgs;
-                try {
-                    pkgs = MobyDroid.getDevice().newPackagesListTask();
-                } catch (IOException | JadbException ex) {
-                    return null;
-                }
-                // start publishing
-                int progress;
-                int counter = 0;
-                for (Apkg pkg : pkgs) {
-                    // publish pkg for processing
-                    publish(pkg);
-                    // set progress
-                    progress = (counter++) * 100 / pkgs.size();
-                    setProgress(progress);
-                    MobyDroid.setProgressBarValue(progress);
-                }
-                return null;
-            }
-
-            @Override
-            protected void process(List<Apkg> pkgs) {
-                pkgs.forEach((pkg) -> {
-                    packageTableModel.addPackage(new ApkgManager(pkg, false));
-                });
-            }
-
-            @Override
-            protected void done() {
-                // set progress
-                setProgress(100);
-                MobyDroid.setProgressBarValue(100);
-                // add back the ListSelectionListener
-                jTable_Apps.getSelectionModel().addListSelectionListener(listSelectionListener);
-                // enable jTable
-                jTable_Apps.setEnabled(true);
-            }
-        };
-        worker.execute();
-         */
     }
 
     /**
@@ -337,7 +282,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
         // enable UI
         enableUI();
-
     }
 
     /**
@@ -361,7 +305,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
         // enable UI
         enableUI();
-        */
+         */
     }
 
     /**
@@ -391,7 +335,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         }
         // enable UI
         enableUI();
-        */
+         */
     }
 
     /**
@@ -426,35 +370,26 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     // *************************************************************
     class PopUpDemo extends JPopupMenu {
 
-        /*
-        JMenuItem refreshMenuItem = new JMenuItem("Refresh",refreshIcon);
-        JMenuItem downloadMenuItem = new JMenuItem("Download",downloadIcon);
-        JMenuItem uploadMenuItem = new JMenuItem("Upload",uploadIcon);
-        JMenuItem runMenuItem = new JMenuItem("Run",runIcon);
-        JMenuItem renameMenuItem = new JMenuItem("Rename",renameIcon);
-        JMenuItem deleteMenuItem = new JMenuItem("Delete",deleteIcon);
-        JMenuItem mkdirMenuItem = new JMenuItem("Creat folder",folderIcon);
-        JMenuItem openAgentFolderMenuItem = new JMenuItem("Open user folder",downloadsIcon);*/
+        JMenuItem refreshMenuItem = new JMenuItem("Refresh", MaterialIcons.REFRESH);
+        JMenuItem uninstallMenuItem = new JMenuItem("Download", MaterialIcons.DELETE_FOREVER);
+        JMenuItem pullMenuItem = new JMenuItem("Upload", MaterialIcons.SAVE);
+
         public PopUpDemo() {
-            /*
-            refreshMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {refreshCMD(evt);}});
-            downloadMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {downloadCMD(evt);}});
-            uploadMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {uploadCMD(evt);}});
-            runMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {runCMD(evt);}});
-            renameMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {renameCMD(evt);}});
-            deleteMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {deleteCMD(evt);}});
-            mkdirMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {mkdirCMD(evt);}});
-            openAgentFolderMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {openAgentFolderCMD(evt);}});
-            
+            refreshMenuItem.addActionListener((ActionEvent evt) -> {
+                refreshHandle();
+            });
+
+            uninstallMenuItem.addActionListener((ActionEvent evt) -> {
+                uninstallHandle();
+            });
+
+            pullMenuItem.addActionListener((ActionEvent evt) -> {
+                pullHandle();
+            });
+
             add(refreshMenuItem);
-            add(downloadMenuItem);
-            add(uploadMenuItem);
-            add(runMenuItem);
-            add(renameMenuItem);
-            add(deleteMenuItem);
-            add(mkdirMenuItem);
-            add(openAgentFolderMenuItem);
-             */
+            add(uninstallMenuItem);
+            add(pullMenuItem);
         }
     }
 
@@ -864,7 +799,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         materialButtonH_Restore.setAction(new MaterialButtonAction() {
             @Override
             public void Action() {
-                RestoreHandle();
+                restoreHandle();
             }
         });
         materialButtonH_Restore.setFocusable(true);
@@ -874,7 +809,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         materialButtonH_Refresh.setAction(new MaterialButtonAction() {
             @Override
             public void Action() {
-                RefreshHandle();
+                refreshHandle();
             }
         });
         materialButtonH_Refresh.setFocusable(true);
@@ -1015,49 +950,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 //KeyboardFocusManager.getCurrentKeyboardFocusManager().focusNextComponent();
                 break;
         }
-        /*
-        int input = evt.getKeyCode();
-        if(input==KeyEvent.VK_ENTER){
-            if(currentFile.type.equalsIgnoreCase("desktop") || currentFile.type.equalsIgnoreCase("computer") || currentFile.type.equalsIgnoreCase("hdd") || currentFile.type.equalsIgnoreCase("fdd") || currentFile.type.equalsIgnoreCase("cd") || currentFile.type.equalsIgnoreCase("home") || currentFile.type.equalsIgnoreCase("dir")){
-                getChildren();
-            }
-        }else if(input==KeyEvent.VK_BACK_SPACE){
-            MyFile tmpFile =((PackageTableModel)browserTable.getModel()).getFile("..");
-            if(tmpFile==null){
-                //tmpFile = new MyFile("..","dir","");
-                //currentFile = tmpFile;
-                ///getChildren();
-                getChildren(computerNode);
-            }else{
-                currentFile = tmpFile;
-                setFileDetails(currentFile);
-                getChildren();
-            }
-        }else if(input==KeyEvent.VK_HOME){
-            browserTable.changeSelection(0, 0, false, false);
-        }else if(input==KeyEvent.VK_END){
-            //browserTable.sets
-            browserTable.changeSelection(browserTable.getRowCount() - 1, 0, false, false);
-        }
-         */
- /*int startRow = jTable_Apps.getSelectedRow();
-        if (startRow < 0) {
-            startRow = 0;
-        } else {
-            startRow++;
-        }
-        for (int row = startRow; row < jTable_Apps.getRowCount(); row++) {
-            if (((String) jTable_Apps.getValueAt(row, 1)).toLowerCase().startsWith("" + Character.toLowerCase(evt.getKeyChar()))) {
-                jTable_Apps.changeSelection(row, 0, false, false);
-                return;
-            }
-        }
-        for (int row = 0; row < jTable_Apps.getRowCount(); row++) {
-            if (((String) jTable_Apps.getValueAt(row, 1)).toLowerCase().startsWith("" + Character.toLowerCase(evt.getKeyChar()))) {
-                jTable_Apps.changeSelection(row, 0, false, false);
-                return;
-            }
-        }*/
     }//GEN-LAST:event_jTable_AppsKeyPressed
 
     private void jTable_AppsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable_AppsFocusGained
@@ -1066,7 +958,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
             jTable_Apps.setRowSelectionInterval(0, 0);
         }
     }//GEN-LAST:event_jTable_AppsFocusGained
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel_AppIcon;

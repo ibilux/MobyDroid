@@ -1,15 +1,15 @@
 package com.hq.mobydroid.gui;
 
-import com.hq.mobydroid.device.ApkgInstaller;
-import com.hq.apktool.Apkg;
 import com.hq.apktool.ApkTool;
 import com.hq.apktool.ApkToolException;
+import com.hq.apktool.Apkg;
 import com.hq.materialdesign.MaterialColor;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.Log;
 import com.hq.mobydroid.MobyDroid;
 import com.hq.mobydroid.MobydroidStatic;
 import com.hq.mobydroid.Settings;
+import com.hq.mobydroid.device.ApkgInstaller;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -33,6 +33,7 @@ import javax.swing.DefaultRowSorter;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -110,7 +111,7 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
         jTable_Apps.getSelectionModel().addListSelectionListener(listSelectionListener);
 
         // Handle drag & drop files into jPanel
-        dropItHandle();
+        dropHandle();
 
         // load checkbox values
         jCheckBox_Onsdcard.setSelected(Boolean.valueOf(Settings.get("AppInstaller_Onsdcard")));
@@ -118,7 +119,7 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
         jCheckBox_Downgrade.setSelected(Boolean.valueOf(Settings.get("AppInstaller_Downgrade")));
 
         // hide for non expert
-        if (!Boolean.valueOf(Settings.get("Express_Settings"))) {
+        if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             jCheckBox_Onsdcard.setVisible(false);
             jCheckBox_Reinstall.setVisible(false);
             jCheckBox_Downgrade.setVisible(false);
@@ -127,11 +128,6 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
             jTable_Apps.removeColumn(jTable_Apps.getColumnModel().getColumn(3));
         }
 
-        //disableUI();
-        //jTable_Apps.removeColumn(jTable_Apps.getColumnModel().getColumn(1));
-        //jTable_Apps.addColumn(jTable_Apps.getColumnModel().getColumn(1));
-        //setColumnWidth(2, 0, 0);
-        //jTable_Apps.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), "none");
     }
 
     /**
@@ -152,10 +148,15 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
 
         // disable UI
         disableUI();
+
         // clear current table
         packageTableModel.removeAllPackages();
+
         // enable UI
         enableUI();
+
+        // show tasks progress window
+        MobyDroid.showTasksPanel();
     }
 
     /**
@@ -209,7 +210,6 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
             // enable UI
             enableUI();
         }
-
     }
 
     /**
@@ -285,7 +285,7 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
     /**
      *
      */
-    private void dropItHandle() {
+    private void dropHandle() {
         // Handle drag & drop files into jPanel
         this.setDropTarget(new DropTarget() {
             @Override
@@ -335,35 +335,25 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
     // *************************************************************
     class PopUpDemo extends JPopupMenu {
 
-        /*
-        JMenuItem refreshMenuItem = new JMenuItem("Refresh",refreshIcon);
-        JMenuItem downloadMenuItem = new JMenuItem("Download",downloadIcon);
-        JMenuItem uploadMenuItem = new JMenuItem("Upload",uploadIcon);
-        JMenuItem runMenuItem = new JMenuItem("Run",runIcon);
-        JMenuItem renameMenuItem = new JMenuItem("Rename",renameIcon);
-        JMenuItem deleteMenuItem = new JMenuItem("Delete",deleteIcon);
-        JMenuItem mkdirMenuItem = new JMenuItem("Creat folder",folderIcon);
-        JMenuItem openAgentFolderMenuItem = new JMenuItem("Open user folder",downloadsIcon);*/
+        JMenuItem addMenuItem = new JMenuItem("Refresh", MaterialIcons.ADD_CIRCLE_OUTLINE);
+        JMenuItem removeMenuItem = new JMenuItem("Download", MaterialIcons.REMOVE_CIRCLE_OUTLINE);
+        JMenuItem installMenuItem = new JMenuItem("Upload", MaterialIcons.ARCHIVE);
+
         public PopUpDemo() {
-            /*
-            refreshMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {refreshCMD(evt);}});
-            downloadMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {downloadCMD(evt);}});
-            uploadMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {uploadCMD(evt);}});
-            runMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {runCMD(evt);}});
-            renameMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {renameCMD(evt);}});
-            deleteMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {deleteCMD(evt);}});
-            mkdirMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {mkdirCMD(evt);}});
-            openAgentFolderMenuItem.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {openAgentFolderCMD(evt);}});
-            
-            add(refreshMenuItem);
-            add(downloadMenuItem);
-            add(uploadMenuItem);
-            add(runMenuItem);
-            add(renameMenuItem);
-            add(deleteMenuItem);
-            add(mkdirMenuItem);
-            add(openAgentFolderMenuItem);
-             */
+            addMenuItem.addActionListener((ActionEvent evt) -> {
+                AddPackageEvent();
+            });
+            removeMenuItem.addActionListener((ActionEvent evt) -> {
+                RemovePackageEvent();
+            });
+            installMenuItem.addActionListener((ActionEvent evt) -> {
+                installHandle();
+            });
+
+            add(addMenuItem);
+            add(removeMenuItem);
+            add(installMenuItem);
+
         }
     }
 
@@ -923,49 +913,6 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
                 //KeyboardFocusManager.getCurrentKeyboardFocusManager().focusNextComponent();
                 break;
         }
-        /*
-        int input = evt.getKeyCode();
-        if(input==KeyEvent.VK_ENTER){
-            if(currentFile.type.equalsIgnoreCase("desktop") || currentFile.type.equalsIgnoreCase("computer") || currentFile.type.equalsIgnoreCase("hdd") || currentFile.type.equalsIgnoreCase("fdd") || currentFile.type.equalsIgnoreCase("cd") || currentFile.type.equalsIgnoreCase("home") || currentFile.type.equalsIgnoreCase("dir")){
-                getChildren();
-            }
-        }else if(input==KeyEvent.VK_BACK_SPACE){
-            MyFile tmpFile =((PackageTableModel)browserTable.getModel()).getFile("..");
-            if(tmpFile==null){
-                //tmpFile = new MyFile("..","dir","");
-                //currentFile = tmpFile;
-                ///getChildren();
-                getChildren(computerNode);
-            }else{
-                currentFile = tmpFile;
-                setFileDetails(currentFile);
-                getChildren();
-            }
-        }else if(input==KeyEvent.VK_HOME){
-            browserTable.changeSelection(0, 0, false, false);
-        }else if(input==KeyEvent.VK_END){
-            //browserTable.sets
-            browserTable.changeSelection(browserTable.getRowCount() - 1, 0, false, false);
-        }
-         */
- /*int startRow = jTable_Apps.getSelectedRow();
-        if (startRow < 0) {
-            startRow = 0;
-        } else {
-            startRow++;
-        }
-        for (int row = startRow; row < jTable_Apps.getRowCount(); row++) {
-            if (((String) jTable_Apps.getValueAt(row, 1)).toLowerCase().startsWith("" + Character.toLowerCase(evt.getKeyChar()))) {
-                jTable_Apps.changeSelection(row, 0, false, false);
-                return;
-            }
-        }
-        for (int row = 0; row < jTable_Apps.getRowCount(); row++) {
-            if (((String) jTable_Apps.getValueAt(row, 1)).toLowerCase().startsWith("" + Character.toLowerCase(evt.getKeyChar()))) {
-                jTable_Apps.changeSelection(row, 0, false, false);
-                return;
-            }
-        }*/
     }//GEN-LAST:event_jTable_AppsKeyPressed
 
     private void jTable_AppsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable_AppsFocusGained
@@ -995,7 +942,6 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
         Settings.set("AppInstaller_Downgrade", String.valueOf(jCheckBox_Downgrade.isSelected()));
         Settings.save();
     }//GEN-LAST:event_jCheckBox_DowngradeActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox_Downgrade;

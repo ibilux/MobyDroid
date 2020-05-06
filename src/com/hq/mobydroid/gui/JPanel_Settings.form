@@ -47,9 +47,9 @@
                       <Component id="jLabel_HomePath" linkSize="18" min="-2" pref="193" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel_ExpressSettingsIcon" linkSize="17" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jLabel_ExpertSettingsIcon" linkSize="17" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel_ExpressSettings" linkSize="18" min="-2" pref="199" max="-2" attributes="0"/>
+                      <Component id="jLabel_ExpertSettings" linkSize="18" min="-2" pref="199" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel_SuRootIcon" linkSize="17" min="-2" pref="32" max="-2" attributes="0"/>
@@ -62,7 +62,7 @@
                   <Component id="jTextField_HomePath" alignment="0" pref="296" max="32767" attributes="0"/>
                   <Component id="jTextField_LogPath" alignment="0" pref="296" max="32767" attributes="0"/>
                   <Component id="jCheckBox_SuRoot" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jCheckBox_ExpressSettings" alignment="0" pref="296" max="32767" attributes="0"/>
+                  <Component id="jCheckBox_ExpertSettings" alignment="0" pref="296" max="32767" attributes="0"/>
                   <Component id="jComboBox_Language" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -80,9 +80,9 @@
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel_ExpressSettings" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jLabel_ExpressSettingsIcon" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jCheckBox_ExpressSettings" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel_ExpertSettings" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jLabel_ExpertSettingsIcon" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="jCheckBox_ExpertSettings" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -142,7 +142,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel_ExpressSettingsIcon">
+    <Component class="javax.swing.JLabel" name="jLabel_ExpertSettingsIcon">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="MaterialIcons.ICON_FONT.deriveFont(24f)" type="code"/>
@@ -156,22 +156,22 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel_ExpressSettings">
+    <Component class="javax.swing.JLabel" name="jLabel_ExpertSettings">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="61" green="61" red="61" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Express settings :"/>
+        <Property name="text" type="java.lang.String" value="Expert settings :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox_ExpressSettings">
+    <Component class="javax.swing.JCheckBox" name="jCheckBox_ExpertSettings">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fa" green="fa" red="fa" type="rgb"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox_ExpressSettingsActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox_ExpertSettingsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel_HomePathIcon">

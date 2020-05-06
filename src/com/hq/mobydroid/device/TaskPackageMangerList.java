@@ -1,12 +1,12 @@
 package com.hq.mobydroid.device;
 
 import com.hq.apktool.Apkg;
-import java.io.IOException;
 import com.hq.jadb.engine.JadbException;
 import com.hq.jadb.manager.JadbDevicePackages;
 import com.hq.materialdesign.MaterialColor;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.Log;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;

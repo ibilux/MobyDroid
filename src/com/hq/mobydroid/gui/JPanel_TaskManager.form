@@ -94,8 +94,6 @@
               <Connection code="taskTableModel" type="code"/>
             </Property>
             <Property name="autoResizeMode" type="int" value="0"/>
-            <Property name="showHorizontalLines" type="boolean" value="false"/>
-            <Property name="showVerticalLines" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTable_TasksFocusGained"/>

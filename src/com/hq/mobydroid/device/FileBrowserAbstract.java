@@ -23,7 +23,7 @@ public abstract class FileBrowserAbstract {
     }
 
     public abstract List<MyFile> goTo(String path);
-    
+
     public abstract List<MyFile> list(String path);
 
     public abstract boolean rename(String src, String dst);
@@ -62,10 +62,14 @@ public abstract class FileBrowserAbstract {
         return src;
     }
 
+    public void setDst(String path) {
+        this.dst = new MyFile(path, (0x1 << 14), 0, 0);
+    }
+
     public MyFile getDst() {
         return dst;
     }
-    
+
     public String resolvePath(String name) {
         return path.resolve(name).toString();
     }

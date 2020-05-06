@@ -115,7 +115,7 @@ public class GuiUtils {
 
     /**
      * Get file icon from file type.
-     * 
+     *
      * @param fileType
      * @return
      */

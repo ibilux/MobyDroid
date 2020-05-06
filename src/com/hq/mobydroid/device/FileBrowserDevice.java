@@ -1,7 +1,7 @@
 package com.hq.mobydroid.device;
 
-import com.hq.jadb.engine.JadbException;
 import com.hq.jadb.MyFile;
+import com.hq.jadb.engine.JadbException;
 import com.hq.mobydroid.Log;
 import com.hq.mobydroid.MobyDroid;
 import java.io.IOException;

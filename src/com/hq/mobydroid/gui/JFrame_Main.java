@@ -111,7 +111,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         homeHandle();
 
         // hide for non expert
-        if (!Boolean.valueOf(Settings.get("Express_Settings"))) {
+        if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             jButton_Terminal.setVisible(false);
         }
     }
@@ -192,7 +192,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                     deviceName += "</b><br>";
                     if (jadbDeviceProperties.getProductModel().length() > 20) {
                         deviceName += jadbDeviceProperties.getProductModel().substring(0, 20);
-                    }else{
+                    } else {
                         deviceName += jadbDeviceProperties.getProductModel();
                     }
                     deviceName += "</html>";
@@ -253,7 +253,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         panelHandle(jPanel_Settings);
     }
 
-    private void tasksHandle() {
+    public void tasksHandle() {
         panelHandle(jPanel_TaskManager);
     }
 
@@ -954,7 +954,6 @@ public class JFrame_Main extends javax.swing.JFrame {
     private void jProgressBar_MainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProgressBar_MainMouseClicked
         tasksHandle();
     }//GEN-LAST:event_jProgressBar_MainMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.hq.mobydroid.gui.MaterialButtonH jButton_AppInstaller;

@@ -101,13 +101,6 @@ public class MobydroidDevice extends JadbDeviceManager {
      */
     public float getTasksProgress() {
         Stream<TaskWorker> stream = tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.PENDING || taskWorker.getStatus() == TaskWorker.Status.STARTED || taskWorker.getStatus() == TaskWorker.Status.DONE));
-        //Stream<TaskWorker> stream = tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.PENDING || taskWorker.getStatus() == TaskWorker.Status.STARTED));
-        //Stream<TaskWorker> stream = tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.STARTED));
-        //System.out.println("sum : " + stream.map((taskWorker) -> taskWorker.getProgress()).reduce(0, Integer::sum));
-        //System.out.println("sum : " + stream.mapToInt((taskWorker) -> taskWorker.getProgress()).sum());
-        //System.out.println("count : " + stream.count());
-        //System.out.println("count : " + stream.collect(Averager::new, Averager::accept, Averager::combine).average());
-        //System.out.println("count : " + stream.collect(Collectors.groupingBy(TaskWorker::getProgress,Collectors.summarizingDouble(TaskWorker::getProgress))));
         OptionalDouble average = stream.mapToDouble(taskWorker -> taskWorker.getProgress()).average();
 
         try {
@@ -116,17 +109,12 @@ public class MobydroidDevice extends JadbDeviceManager {
             return 0;
         }
 
-        //System.out.println("count : " + stream.mapToDouble(taskWorker -> taskWorker.getProgress()).average().getAsDouble());
-        //return stream.map((taskWorker) -> taskWorker.getProgress()).reduce(0, Integer::sum) / stream.count();
-        //return average == ?;
     }
 
     /**
      * Clear finished, failed and cancelled tasks list.
      */
     public void clearDeadTasks() {
-        //tasks.forEach(tasks::remove);
-        //tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.DONE || taskWorker.getStatus() == TaskWorker.Status.FAILED || taskWorker.getStatus() == TaskWorker.Status.CANCELLED)).forEach(tasks->{});
         tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.DONE || taskWorker.getStatus() == TaskWorker.Status.FAILED || taskWorker.getStatus() == TaskWorker.Status.CANCELLED)).forEachOrdered((taskWorker) -> {
             tasks.remove(taskWorker);
         });
