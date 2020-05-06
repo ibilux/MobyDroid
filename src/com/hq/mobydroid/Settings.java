@@ -22,7 +22,7 @@ public class Settings {
     // pre-settings
     private static final Map<String, String> settings = new HashMap() {
         {
-            put("Expert_Settings", "false");
+            put("Expert_Settings", "true");
             put("AppInstaller_Onsdcard", "false");
             put("AppInstaller_Reinstall", "true");
             put("AppInstaller_Downgrade", "true");
