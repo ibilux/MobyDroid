@@ -139,6 +139,11 @@ public class JPanel_AppManager extends javax.swing.JPanel {
      * Handle buttons events.
      */
     private void uninstallHandle() {
+        // check for connected device
+        if (!isDeviceConnected()) {
+            return;
+        }
+
         // check if any packages are marked
         if (!isPackageMarked()) {
             return;
@@ -163,11 +168,16 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     }
 
     private void pullHandle() {
+        // check for connected device
+        if (!isDeviceConnected()) {
+            return;
+        }
+
         // check if any packages are marked
         if (!isPackageMarked()) {
             return;
         }
-        
+
         pullPackages();
 
         // show tasks progress window
@@ -175,10 +185,24 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     }
 
     private void refreshHandle() {
+        // check for connected device
+        if (!isDeviceConnected()) {
+            return;
+        }
+
         updatePackagesList();
 
         // show tasks progress window
         // MobyDroid.showTasksPanel();
+    }
+
+    private boolean isDeviceConnected() {
+        // check for connected device
+        if (MobyDroid.getDevice() == null) {
+            JOptionPane.showMessageDialog(this, "Please connect to a device first.", "No device", JOptionPane.OK_OPTION, ResourceLoader.MaterialIcons_WARNING);
+            return false;
+        }
+        return true;
     }
 
     private boolean isPackageMarked() {
