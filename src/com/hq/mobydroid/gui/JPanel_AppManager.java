@@ -139,6 +139,15 @@ public class JPanel_AppManager extends javax.swing.JPanel {
      * Handle buttons events.
      */
     private void uninstallHandle() {
+        // check if any packages are marked
+        if (!isPackageMarked()) {
+            return;
+        }
+        // confirm uninstalling
+        if (JOptionPane.showConfirmDialog(this, "Are you sure?", "Uninstall packages", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, ResourceLoader.MaterialIcons_DELETE_FOREVER) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
         uninstallPackages();
 
         // show tasks progress window
@@ -154,6 +163,11 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     }
 
     private void pullHandle() {
+        // check if any packages are marked
+        if (!isPackageMarked()) {
+            return;
+        }
+        
         pullPackages();
 
         // show tasks progress window
@@ -243,15 +257,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
      * Uninstall packages.
      */
     private void uninstallPackages() {
-        // check if any packages are marked
-        if (!isPackageMarked()) {
-            return;
-        }
-        // confirm uninstalling
-        if (JOptionPane.showConfirmDialog(this, "Are you sure?", "Uninstall packages", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, ResourceLoader.MaterialIcons_DELETE_FOREVER) != JOptionPane.YES_OPTION) {
-            return;
-        }
-
         // disable UI
         disableUI();
 
@@ -268,10 +273,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
      * Pull apk file for packages.
      */
     private void pullPackages() {
-        // check if any packages are marked
-        if (!isPackageMarked()) {
-            return;
-        }
         // disable UI
         disableUI();
 
