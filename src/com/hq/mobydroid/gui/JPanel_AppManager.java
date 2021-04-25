@@ -371,8 +371,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     class PopUpDemo extends JPopupMenu {
 
         JMenuItem refreshMenuItem = new JMenuItem("Refresh", MaterialIcons.REFRESH);
-        JMenuItem uninstallMenuItem = new JMenuItem("Download", MaterialIcons.DELETE_FOREVER);
-        JMenuItem pullMenuItem = new JMenuItem("Upload", MaterialIcons.SAVE);
+        JMenuItem uninstallMenuItem = new JMenuItem("Uninstall", MaterialIcons.DELETE_FOREVER);
+        JMenuItem pullMenuItem = new JMenuItem("Pull", MaterialIcons.SAVE);
 
         public PopUpDemo() {
             refreshMenuItem.addActionListener((ActionEvent evt) -> {
