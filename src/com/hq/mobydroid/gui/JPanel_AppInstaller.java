@@ -134,6 +134,12 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
      * Handle install button event.
      */
     private void installHandle() {
+        // check for connected device
+        if (MobyDroid.getDevice() == null) {
+            JOptionPane.showMessageDialog(this, "Please connect to a device first.", "No device", JOptionPane.OK_OPTION, ResourceLoader.MaterialIcons_WARNING);
+            return;
+        }
+
         // check for packages list size
         int count = packageTableModel.getPackages().size();
         if (count == 0) {
@@ -335,9 +341,9 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
     // *************************************************************
     class PopUpDemo extends JPopupMenu {
 
-        JMenuItem addMenuItem = new JMenuItem("Refresh", MaterialIcons.ADD_CIRCLE_OUTLINE);
-        JMenuItem removeMenuItem = new JMenuItem("Download", MaterialIcons.REMOVE_CIRCLE_OUTLINE);
-        JMenuItem installMenuItem = new JMenuItem("Upload", MaterialIcons.ARCHIVE);
+        JMenuItem addMenuItem = new JMenuItem("Add", MaterialIcons.ADD_CIRCLE_OUTLINE);
+        JMenuItem removeMenuItem = new JMenuItem("Remove", MaterialIcons.REMOVE_CIRCLE_OUTLINE);
+        JMenuItem installMenuItem = new JMenuItem("Install", MaterialIcons.ARCHIVE);
 
         public PopUpDemo() {
             addMenuItem.addActionListener((ActionEvent evt) -> {
