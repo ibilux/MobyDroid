@@ -178,7 +178,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         updatePackagesList();
 
         // show tasks progress window
-        MobyDroid.showTasksPanel();
+        // MobyDroid.showTasksPanel();
     }
 
     private boolean isPackageMarked() {
