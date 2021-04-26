@@ -114,6 +114,11 @@ public class JFrame_Main extends javax.swing.JFrame {
         if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             jButton_Terminal.setVisible(false);
         }
+        
+        // hide if root is not activated
+        if (!Boolean.valueOf(Settings.get("SuRoot"))) {
+            jButton_SuRoot.setVisible(false);
+        }
     }
 
     /**
@@ -269,6 +274,14 @@ public class JFrame_Main extends javax.swing.JFrame {
     private void terminalHandle() {
         jPanel_Terminal.updateShellTransport();
         panelHandle(jPanel_Terminal);
+    }
+
+    private void suRootHandle() {
+        try {
+            mDevice.root();
+        } catch (IOException | JadbException ex) {
+            Log.log(Level.SEVERE, "SuRoot", ex);
+        }
     }
 
     /**
@@ -565,6 +578,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler = new javax.swing.JPanel();
         jPanel_Button = new javax.swing.JPanel();
         jComboBox_Devices = new javax.swing.JComboBox<>();
+        jButton_SuRoot = new com.hq.mobydroid.gui.MaterialButtonIconV();
         jButton_Home = new com.hq.mobydroid.gui.MaterialButtonH();
         jButton_AppManager = new com.hq.mobydroid.gui.MaterialButtonH();
         jButton_AppInstaller = new com.hq.mobydroid.gui.MaterialButtonH();
@@ -675,7 +689,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler.setLayout(jPanel_MainHandlerLayout);
         jPanel_MainHandlerLayout.setHorizontalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 591, Short.MAX_VALUE)
         );
         jPanel_MainHandlerLayout.setVerticalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,6 +709,18 @@ public class JFrame_Main extends javax.swing.JFrame {
                 jComboBox_DevicesItemStateChanged(evt);
             }
         });
+
+        jButton_SuRoot.setToolTipText("SuROOT");
+        jButton_SuRoot.setAction(new MaterialButtonAction() {
+            @Override
+            public void Action() {
+                suRootHandle();
+            }
+        });
+        jButton_SuRoot.setAlignmentX(0.0F);
+        jButton_SuRoot.setAlignmentY(0.0F);
+        jButton_SuRoot.setFocusable(true);
+        jButton_SuRoot.setIcon(MaterialIcons.BUILD);
 
         jButton_Home.setAction(new MaterialButtonAction() {
             @Override
@@ -794,17 +820,22 @@ public class JFrame_Main extends javax.swing.JFrame {
             .addComponent(jButton_AppManager, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton_AppInstaller, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton_FileManager, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jComboBox_Devices, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton_TaskManager, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton_ScreenCapture, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton_PhoneInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton_Terminal, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
             .addComponent(jButton_Settings, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+            .addGroup(jPanel_ButtonLayout.createSequentialGroup()
+                .addComponent(jComboBox_Devices, 0, 176, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jButton_SuRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_ButtonLayout.setVerticalGroup(
             jPanel_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_ButtonLayout.createSequentialGroup()
-                .addComponent(jComboBox_Devices, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox_Devices, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(jButton_SuRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Home, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -819,7 +850,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addComponent(jButton_PhoneInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jButton_Terminal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
                 .addComponent(jButton_Settings, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jButton_TaskManager, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -966,6 +997,7 @@ public class JFrame_Main extends javax.swing.JFrame {
     private com.hq.mobydroid.gui.MaterialButtonH jButton_PhoneInfo;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_ScreenCapture;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_Settings;
+    private com.hq.mobydroid.gui.MaterialButtonIconV jButton_SuRoot;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_TaskManager;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_Terminal;
     private javax.swing.JComboBox<String> jComboBox_Devices;

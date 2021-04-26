@@ -246,7 +246,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="String.valueOf(MaterialIcons.BUILD)" type="code"/>
+          <Connection code="String.valueOf(MaterialIcons.PHONELINK_SETUP)" type="code"/>
         </Property>
       </Properties>
     </Component>

@@ -117,7 +117,7 @@ public class JPanel_Settings extends javax.swing.JPanel {
         jLabel_SuRootIcon.setFont(MaterialIcons.ICON_FONT.deriveFont(24f));
         jLabel_SuRootIcon.setForeground(new java.awt.Color(97, 97, 97));
         jLabel_SuRootIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_SuRootIcon.setText(String.valueOf(MaterialIcons.BUILD));
+        jLabel_SuRootIcon.setText(String.valueOf(MaterialIcons.PHONELINK_SETUP));
 
         jCheckBox_SuRoot.setBackground(new java.awt.Color(250, 250, 250));
         jCheckBox_SuRoot.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +220,8 @@ public class JPanel_Settings extends javax.swing.JPanel {
         // save value
         Settings.set("SuRoot", String.valueOf(jCheckBox_SuRoot.isSelected()));
         Settings.save();
+        // show warning
+        JOptionPane.showMessageDialog(this, "You need to restart application for this change to take effect.", "Restart needed", JOptionPane.OK_OPTION, ResourceLoader.MaterialIcons_WARNING);
     }//GEN-LAST:event_jCheckBox_SuRootActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
