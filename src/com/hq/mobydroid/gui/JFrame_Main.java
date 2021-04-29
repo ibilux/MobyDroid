@@ -212,16 +212,20 @@ public class JFrame_Main extends javax.swing.JFrame {
         });
 
         // remove ejected devices from mDevices list
-        mDevices.forEach((jadbdevice) -> {
-            if (!devices.containsValue(jadbdevice)) {
-                // get mDevice index in the list
-                int deviceIndex = mDevices.indexOf(jadbdevice);
-                // remove mDevice from mDevices list
-                mDevices.remove(deviceIndex);
-                // remove mDevice from comboBox
-                jComboBox_Devices.removeItemAt(deviceIndex);
-            }
-        });
+        try {
+            mDevices.forEach((jadbdevice) -> {
+                if (!devices.containsValue(jadbdevice)) {
+                    // get mDevice index in the list
+                    int deviceIndex = mDevices.indexOf(jadbdevice);
+                    // remove mDevice from mDevices list
+                    mDevices.remove(deviceIndex);
+                    // remove mDevice from comboBox
+                    jComboBox_Devices.removeItemAt(deviceIndex);
+                }
+            });
+        } catch (ConcurrentModificationException ex) {
+            Log.log(Level.SEVERE, "EjectedDevices", ex);
+        }
     }
 
     /**
