@@ -11,6 +11,7 @@ import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.Log;
 import com.hq.mobydroid.MobyDroid;
 import com.hq.mobydroid.Settings;
+import com.hq.mobydroid.Utils;
 import com.hq.mobydroid.device.MobydroidDevice;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -24,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -114,7 +116,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             jButton_Terminal.setVisible(false);
         }
-        
+
         // hide if root is not activated
         if (!Boolean.valueOf(Settings.get("SuRoot"))) {
             jButton_SuRoot.setVisible(false);
@@ -277,10 +279,30 @@ public class JFrame_Main extends javax.swing.JFrame {
     }
 
     private void suRootHandle() {
+        if (mDevice != null) {
+            try {
+                mDevice.root();
+            } catch (IOException | JadbException ex) {
+                Log.log(Level.SEVERE, "SuRoot", ex);
+            }
+        }
+    }
+
+    private void connectHandle() {
         try {
-            mDevice.root();
+            String host = jTextField_Host.getText();
+            int port = Utils.strToInt(jFormattedTextField_Port.getText());
+            MobyDroid.getJadb().connect(host, port);
         } catch (IOException | JadbException ex) {
-            Log.log(Level.SEVERE, "SuRoot", ex);
+            Log.log(Level.SEVERE, "connectHandle", ex);
+        }
+    }
+
+    private void disconnectHandle() {
+        try {
+            MobyDroid.getJadb().disconnect();
+        } catch (IOException | JadbException ex) {
+            Log.log(Level.SEVERE, "disconnectHandle", ex);
         }
     }
 
@@ -294,7 +316,6 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler.add(jComponent);
         //pack();
         jPanel_MainHandler.setVisible(true);
-
     }
 
     /**
@@ -588,6 +609,11 @@ public class JFrame_Main extends javax.swing.JFrame {
         jButton_PhoneInfo = new com.hq.mobydroid.gui.MaterialButtonH();
         jButton_Terminal = new com.hq.mobydroid.gui.MaterialButtonH();
         jButton_Settings = new com.hq.mobydroid.gui.MaterialButtonH();
+        jPanel_Wireless = new javax.swing.JPanel();
+        jTextField_Host = new javax.swing.JTextField();
+        jFormattedTextField_Port = new javax.swing.JFormattedTextField();
+        jButton_Connect = new com.hq.mobydroid.gui.MaterialMiniButtonH();
+        jButton_Disconnect = new com.hq.mobydroid.gui.MaterialMiniButtonH();
         jPanel_Status = new javax.swing.JPanel();
         jLabel_AdbVersion = new javax.swing.JLabel();
         jSeparator_vertical1 = new javax.swing.JSeparator();
@@ -689,11 +715,11 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler.setLayout(jPanel_MainHandlerLayout);
         jPanel_MainHandlerLayout.setHorizontalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 591, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
         );
         jPanel_MainHandlerLayout.setVerticalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
 
         jPanel_Button.setBackground(new java.awt.Color(250, 250, 250));
@@ -703,6 +729,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jComboBox_Devices.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jComboBox_Devices.setForeground(new java.awt.Color(97, 97, 97));
         jComboBox_Devices.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
+        jComboBox_Devices.setPreferredSize(new java.awt.Dimension(36, 28));
         jComboBox_Devices.setRenderer(new ComboBoxRenderar());
         jComboBox_Devices.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -720,7 +747,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jButton_SuRoot.setAlignmentX(0.0F);
         jButton_SuRoot.setAlignmentY(0.0F);
         jButton_SuRoot.setFocusable(true);
-        jButton_SuRoot.setIcon(MaterialIcons.BUILD);
+        jButton_SuRoot.setIcon(MaterialIcons.PHONELINK_SETUP);
 
         jButton_Home.setAction(new MaterialButtonAction() {
             @Override
@@ -812,23 +839,87 @@ public class JFrame_Main extends javax.swing.JFrame {
         jButton_Settings.setIcon(MaterialIcons.SETTINGS);
         jButton_Settings.setText("Settings");
 
+        jPanel_Wireless.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel_Wireless.setBorder(javax.swing.BorderFactory.createTitledBorder("Wireless:"));
+
+        jTextField_Host.setText("192.168.1.1");
+        jTextField_Host.setMaximumSize(new java.awt.Dimension(64, 2147483647));
+        jTextField_Host.setPreferredSize(new java.awt.Dimension(4, 24));
+
+        jFormattedTextField_Port.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextField_Port.setText("5555");
+        jFormattedTextField_Port.setMaximumSize(new java.awt.Dimension(64, 2147483647));
+        jFormattedTextField_Port.setPreferredSize(new java.awt.Dimension(4, 24));
+
+        jButton_Connect.setToolTipText("");
+        jButton_Connect.setAction(new MaterialButtonAction() {
+            @Override
+            public void Action() {
+                connectHandle();
+            }
+        });
+        jButton_Connect.setFocusable(true);
+        jButton_Connect.setIcon(MaterialIcons.CLOUD_QUEUE);
+        jButton_Connect.setText("Connect");
+
+        jButton_Disconnect.setToolTipText("");
+        jButton_Disconnect.setAction(new MaterialButtonAction() {
+            @Override
+            public void Action() {
+                disconnectHandle();
+            }
+        });
+        jButton_Disconnect.setFocusable(true);
+        jButton_Disconnect.setIcon(MaterialIcons.CLOUD_OFF);
+        jButton_Disconnect.setText("Disconnect");
+
+        javax.swing.GroupLayout jPanel_WirelessLayout = new javax.swing.GroupLayout(jPanel_Wireless);
+        jPanel_Wireless.setLayout(jPanel_WirelessLayout);
+        jPanel_WirelessLayout.setHorizontalGroup(
+            jPanel_WirelessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_WirelessLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel_WirelessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_WirelessLayout.createSequentialGroup()
+                        .addComponent(jTextField_Host, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextField_Port, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_WirelessLayout.createSequentialGroup()
+                        .addComponent(jButton_Connect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_Disconnect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel_WirelessLayout.setVerticalGroup(
+            jPanel_WirelessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_WirelessLayout.createSequentialGroup()
+                .addGroup(jPanel_WirelessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_Host, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField_Port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_WirelessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_Connect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Disconnect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel_ButtonLayout = new javax.swing.GroupLayout(jPanel_Button);
         jPanel_Button.setLayout(jPanel_ButtonLayout);
         jPanel_ButtonLayout.setHorizontalGroup(
             jPanel_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton_Home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_AppManager, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_AppInstaller, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_FileManager, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_TaskManager, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_ScreenCapture, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_PhoneInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_Terminal, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-            .addComponent(jButton_Settings, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+            .addComponent(jButton_Home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_AppManager, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_AppInstaller, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_FileManager, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_TaskManager, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_ScreenCapture, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_PhoneInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_Terminal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jButton_Settings, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel_ButtonLayout.createSequentialGroup()
-                .addComponent(jComboBox_Devices, 0, 176, Short.MAX_VALUE)
+                .addComponent(jComboBox_Devices, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jButton_SuRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel_Wireless, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_ButtonLayout.setVerticalGroup(
             jPanel_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -836,6 +927,8 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addGroup(jPanel_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox_Devices, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addComponent(jButton_SuRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_Wireless, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Home, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -852,7 +945,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addComponent(jButton_Terminal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jButton_Settings, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_TaskManager, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -889,7 +982,7 @@ public class JFrame_Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusLayout.createSequentialGroup()
                 .addComponent(jProgressBar_Main, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jLabel_MainMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addComponent(jLabel_MainMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator_vertical1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -913,7 +1006,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addComponent(jPanel_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel_MainHandler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel_Status, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+            .addComponent(jPanel_Status, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
         );
         jPanel_MainPanelLayout.setVerticalGroup(
             jPanel_MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -990,6 +1083,8 @@ public class JFrame_Main extends javax.swing.JFrame {
     private com.hq.mobydroid.gui.MaterialButtonH jButton_AppInstaller;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_AppManager;
     private javax.swing.JButton jButton_Close;
+    private com.hq.mobydroid.gui.MaterialMiniButtonH jButton_Connect;
+    private com.hq.mobydroid.gui.MaterialMiniButtonH jButton_Disconnect;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_FileManager;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_Home;
     private javax.swing.JButton jButton_Maximize;
@@ -1001,6 +1096,7 @@ public class JFrame_Main extends javax.swing.JFrame {
     private com.hq.mobydroid.gui.MaterialButtonH jButton_TaskManager;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_Terminal;
     private javax.swing.JComboBox<String> jComboBox_Devices;
+    private javax.swing.JFormattedTextField jFormattedTextField_Port;
     private javax.swing.JLabel jLabel_AdbVersion;
     private javax.swing.JLabel jLabel_MainLabel;
     private javax.swing.JLabel jLabel_MainMessage;
@@ -1009,7 +1105,9 @@ public class JFrame_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_MainPanel;
     private javax.swing.JPanel jPanel_Status;
     private javax.swing.JPanel jPanel_TitleBar;
+    private javax.swing.JPanel jPanel_Wireless;
     private javax.swing.JProgressBar jProgressBar_Main;
     private javax.swing.JSeparator jSeparator_vertical1;
+    private javax.swing.JTextField jTextField_Host;
     // End of variables declaration//GEN-END:variables
 }
