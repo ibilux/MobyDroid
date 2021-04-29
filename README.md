@@ -27,19 +27,19 @@ So here it is !
 | Distro | Download Link |
 | - | - |
 | Arch | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
-| Debian | [mobydroid_0.3-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.3/mobydroid_v0.3-1.deb) |
-| Fedora RPM | [mobydroid-0.3-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.3/mobydroid-0.3-1.noarch.rpm) |
+| Debian | [mobydroid_0.4-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.4/mobydroid_v0.4-1.deb) |
+| Fedora RPM | [mobydroid-0.4-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.4/mobydroid-0.4-1.noarch.rpm) |
 | Manjaro | `yaourt mobydroid` [`mobydroid`](https://aur.archlinux.org/packages/mobydroid/) (AUR)|
-| Ubuntu | [mobydroid_0.3-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.3/mobydroid_v0.3-1.deb) |
-| RPM | [mobydroid-0.3-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.3/mobydroid-0.3-1.noarch.rpm) |
+| Ubuntu | [mobydroid_0.4-1.deb](https://github.com/ibilux/MobyDroid/releases/download/v0.4/mobydroid_v0.4-1.deb) |
+| RPM | [mobydroid-0.4-1.rpm](https://github.com/ibilux/MobyDroid/releases/download/v0.4/mobydroid-0.4-1.noarch.rpm) |
 
 
 ## Download ##
 
 | Type | Size | Download Link |
 | - | - | - |
-| Standalone | 2.29 MB | [MobyDroid_v0.3.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.3/MobyDroid_v0.3.zip) |
-| Jar Only | 0.22 MB | [MobyDroid_v0.3_jar.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.3/MobyDroid_v0.3_jar.zip) |
+| Standalone | 2.29 MB | [MobyDroid_v0.4.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.4/MobyDroid_v0.4.zip) |
+| Jar Only | 0.22 MB | [MobyDroid_v0.4_jar.zip](https://github.com/ibilux/MobyDroid/releases/download/v0.4/MobyDroid_v0.4_jar.zip) |
 
 
 ## BETA ##
