@@ -109,9 +109,6 @@ public class JFrame_Main extends javax.swing.JFrame {
             }
         }).start();
 
-        // add home panel
-        homeHandle();
-
         // hide for non expert
         if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
             jButton_Terminal.setVisible(false);
@@ -121,6 +118,9 @@ public class JFrame_Main extends javax.swing.JFrame {
         if (!Boolean.valueOf(Settings.get("SuRoot"))) {
             jButton_SuRoot.setVisible(false);
         }
+
+        // add home panel
+        homeHandle();
     }
 
     /**
