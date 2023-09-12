@@ -64,7 +64,7 @@ public class JPanel_Settings extends javax.swing.JPanel {
         jCheckBox_SuRoot = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(250, 250, 250));
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Screen Capture : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 11))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Settings : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 11))); // NOI18N
 
         jLabel_LanguageIcon.setFont(MaterialIcons.ICON_FONT.deriveFont(24f));
         jLabel_LanguageIcon.setForeground(new java.awt.Color(97, 97, 97));
