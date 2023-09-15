@@ -5,7 +5,7 @@
     <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="MobyDroid"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[796, 496]"/>
+      <Dimension value="[1024, 496]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="MainFrame" noResource="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
@@ -64,7 +64,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jPanel_MainHandler" max="32767" attributes="0"/>
               </Group>
-              <Component id="jPanel_Status" pref="814" max="32767" attributes="0"/>
+              <Component id="jPanel_Status" pref="944" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -240,7 +240,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="570" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="747" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -625,9 +625,9 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jProgressBar_Main" min="-2" pref="198" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="jLabel_MainMessage" pref="462" max="32767" attributes="0"/>
+                      <Component id="jLabel_MainMessage" pref="592" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="jSeparator_vertical1" min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="jSeparator_vertical" min="-2" pref="6" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       <Component id="jLabel_AdbVersion" min="-2" pref="128" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -636,7 +636,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSeparator_vertical1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jSeparator_vertical" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel_AdbVersion" alignment="1" max="32767" attributes="0"/>
                   <Component id="jProgressBar_Main" alignment="1" pref="30" max="32767" attributes="0"/>
                   <Component id="jLabel_MainMessage" alignment="1" max="32767" attributes="0"/>
@@ -655,7 +655,7 @@
                 <Property name="horizontalAlignment" type="int" value="4"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator_vertical1">
+            <Component class="javax.swing.JSeparator" name="jSeparator_vertical">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="fa" green="fa" red="fa" type="rgb"/>

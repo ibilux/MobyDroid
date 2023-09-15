@@ -127,8 +127,18 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         };
         jTable_Apps.getSelectionModel().addListSelectionListener(listSelectionListener);
 
+        // load checkbox values
+        jCheckBox_EnabledApps.setSelected(Boolean.valueOf(Settings.get("AppManager_EnabledApps")));
+        jCheckBox_DisabledApps.setSelected(Boolean.valueOf(Settings.get("AppManager_DisabledApps")));
+        jCheckBox_SystemApps.setSelected(Boolean.valueOf(Settings.get("AppManager_SystemApps")));
+
         // hide for non expert
         if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
+            jCheckBox_EnabledApps.setVisible(false);
+            jCheckBox_DisabledApps.setVisible(false);
+            jCheckBox_SystemApps.setVisible(false);
+            materialButtonH_Enable.setVisible(false);
+            materialButtonH_Disable.setVisible(false);
             materialButtonH_Backup.setVisible(false);
             materialButtonH_Restore.setVisible(false);
             jTable_Apps.removeColumn(jTable_Apps.getColumnModel().getColumn(5));
@@ -154,6 +164,40 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         }
 
         uninstallPackages();
+
+        // show tasks progress window
+        MobyDroid.showTasksPanel();
+    }
+
+    private void enableHandle() {
+        // check for connected device
+        if (!isDeviceConnected()) {
+            return;
+        }
+
+        // check if any packages are marked
+        if (!isPackageMarked()) {
+            return;
+        }
+
+        enablePackages();
+
+        // show tasks progress window
+        MobyDroid.showTasksPanel();
+    }
+
+    private void disableHandle() {
+        // check for connected device
+        if (!isDeviceConnected()) {
+            return;
+        }
+
+        // check if any packages are marked
+        if (!isPackageMarked()) {
+            return;
+        }
+
+        disablePackages();
 
         // show tasks progress window
         MobyDroid.showTasksPanel();
@@ -216,11 +260,17 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
     private void enableUI() {
         // enable buttons
+        materialButtonH_Disable.setEnabled(true);
+        materialButtonH_Enable.setEnabled(true);
         materialButtonH_Backup.setEnabled(true);
         materialButtonH_PullApk.setEnabled(true);
         materialButtonH_Refresh.setEnabled(true);
         materialButtonH_Restore.setEnabled(true);
         materialButtonH_Uninstall.setEnabled(true);
+        // enable CheckBoxs
+        jCheckBox_EnabledApps.setEnabled(true);
+        jCheckBox_DisabledApps.setEnabled(true);
+        jCheckBox_SystemApps.setEnabled(true);
         // add back the ListSelectionListener
         jTable_Apps.getSelectionModel().addListSelectionListener(listSelectionListener);
         // enable jTable
@@ -236,7 +286,13 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jTable_Apps.setVisible(false);
         // remove ListSelectionListener
         jTable_Apps.getSelectionModel().removeListSelectionListener(listSelectionListener);
+        // disable CheckBoxs
+        jCheckBox_EnabledApps.setEnabled(false);
+        jCheckBox_DisabledApps.setEnabled(false);
+        jCheckBox_SystemApps.setEnabled(false);
         // disable buttons
+        materialButtonH_Disable.setEnabled(true);
+        materialButtonH_Enable.setEnabled(true);
         materialButtonH_Backup.setEnabled(false);
         materialButtonH_PullApk.setEnabled(false);
         materialButtonH_Refresh.setEnabled(false);
@@ -252,7 +308,15 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         //List<ApkgManager> oldPackages = packageTableModel.getPackages();
 
         // run the packages list task
-        MobyDroid.getDevice().runPackagesListTask(new TaskListener<Apkg>() {
+        boolean enabled = jCheckBox_EnabledApps.isSelected();
+        boolean disabled = jCheckBox_DisabledApps.isSelected();
+        boolean system = jCheckBox_SystemApps.isSelected();
+        if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
+            enabled = true;
+            disabled = false;
+            system = false;
+        }
+        MobyDroid.getDevice().runPackagesListTask(enabled, disabled, system, new TaskListener<Apkg>() {
             @Override
             public void onStart() {
                 // disable UI
@@ -287,6 +351,38 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         // start uninstall tasks
         packageTableModel.getPackages().stream().filter((pkg) -> (pkg.isMarked())).forEach((pkg) -> {
             MobyDroid.getDevice().runPackageUninstallTask(pkg);
+        });
+
+        // enable UI
+        enableUI();
+    }
+
+    /**
+     * Enable packages.
+     */
+    private void enablePackages() {
+        // disable UI
+        disableUI();
+
+        // start uninstall tasks
+        packageTableModel.getPackages().stream().filter((pkg) -> (pkg.isMarked())).forEach((pkg) -> {
+            MobyDroid.getDevice().runPackageEnableTask(pkg);
+        });
+
+        // enable UI
+        enableUI();
+    }
+
+    /**
+     * Disable packages.
+     */
+    private void disablePackages() {
+        // disable UI
+        disableUI();
+
+        // start uninstall tasks
+        packageTableModel.getPackages().stream().filter((pkg) -> (pkg.isMarked())).forEach((pkg) -> {
+            MobyDroid.getDevice().runPackageDisableTask(pkg);
         });
 
         // enable UI
@@ -397,6 +493,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
         JMenuItem refreshMenuItem = new JMenuItem("Refresh", MaterialIcons.REFRESH);
         JMenuItem uninstallMenuItem = new JMenuItem("Uninstall", MaterialIcons.DELETE_FOREVER);
+        JMenuItem enableMenuItem = new JMenuItem("Enable", MaterialIcons.TOGGLE_ON);
+        JMenuItem disableMenuItem = new JMenuItem("Disable", MaterialIcons.TOGGLE_OFF);
         JMenuItem pullMenuItem = new JMenuItem("Pull", MaterialIcons.SAVE);
 
         public PopUpDemo() {
@@ -408,12 +506,22 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 uninstallHandle();
             });
 
+            enableMenuItem.addActionListener((ActionEvent evt) -> {
+                enableHandle();
+            });
+
+            disableMenuItem.addActionListener((ActionEvent evt) -> {
+                disableHandle();
+            });
+
             pullMenuItem.addActionListener((ActionEvent evt) -> {
                 pullHandle();
             });
 
             add(refreshMenuItem);
             add(uninstallMenuItem);
+            add(enableMenuItem);
+            add(disableMenuItem);
             add(pullMenuItem);
         }
     }
@@ -752,8 +860,13 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         materialButtonH_Uninstall = new com.hq.mobydroid.gui.MaterialButtonV();
         materialButtonH_Backup = new com.hq.mobydroid.gui.MaterialButtonV();
         materialButtonH_PullApk = new com.hq.mobydroid.gui.MaterialButtonV();
+        materialButtonH_Enable = new com.hq.mobydroid.gui.MaterialButtonV();
+        materialButtonH_Disable = new com.hq.mobydroid.gui.MaterialButtonV();
         materialButtonH_Restore = new com.hq.mobydroid.gui.MaterialButtonV();
         materialButtonH_Refresh = new com.hq.mobydroid.gui.MaterialButtonV();
+        jCheckBox_EnabledApps = new javax.swing.JCheckBox();
+        jCheckBox_DisabledApps = new javax.swing.JCheckBox();
+        jCheckBox_SystemApps = new javax.swing.JCheckBox();
         jPanel_Package = new javax.swing.JPanel();
         jLabel_AppIcon = new javax.swing.JLabel();
         jLabel_AppLabel = new javax.swing.JLabel();
@@ -777,8 +890,6 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jTable_Apps.setModel(packageTableModel);
         jTable_Apps.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable_Apps.setComponentPopupMenu(new PopUpDemo());
-        jTable_Apps.setShowHorizontalLines(false);
-        jTable_Apps.setShowVerticalLines(false);
         jTable_Apps.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTable_AppsFocusGained(evt);
@@ -821,6 +932,26 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         materialButtonH_PullApk.setIcon(MaterialIcons.SAVE);
         materialButtonH_PullApk.setText("Pull Apk");
 
+        materialButtonH_Enable.setAction(new MaterialButtonAction() {
+            @Override
+            public void Action() {
+                enableHandle();
+            }
+        });
+        materialButtonH_Enable.setFocusable(true);
+        materialButtonH_Enable.setIcon(MaterialIcons.TOGGLE_ON);
+        materialButtonH_Enable.setText("Enable");
+
+        materialButtonH_Disable.setAction(new MaterialButtonAction() {
+            @Override
+            public void Action() {
+                disableHandle();
+            }
+        });
+        materialButtonH_Disable.setFocusable(true);
+        materialButtonH_Disable.setIcon(MaterialIcons.TOGGLE_OFF);
+        materialButtonH_Disable.setText("Disable");
+
         materialButtonH_Restore.setAction(new MaterialButtonAction() {
             @Override
             public void Action() {
@@ -840,6 +971,33 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         materialButtonH_Refresh.setFocusable(true);
         materialButtonH_Refresh.setIcon(MaterialIcons.REFRESH);
         materialButtonH_Refresh.setText("Refresh");
+
+        jCheckBox_EnabledApps.setBackground(new java.awt.Color(250, 250, 250));
+        jCheckBox_EnabledApps.setForeground(new java.awt.Color(97, 97, 97));
+        jCheckBox_EnabledApps.setText("Show enabled packages");
+        jCheckBox_EnabledApps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_EnabledAppsActionPerformed(evt);
+            }
+        });
+
+        jCheckBox_DisabledApps.setBackground(new java.awt.Color(250, 250, 250));
+        jCheckBox_DisabledApps.setForeground(new java.awt.Color(97, 97, 97));
+        jCheckBox_DisabledApps.setText("Show disabled packages");
+        jCheckBox_DisabledApps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_DisabledAppsActionPerformed(evt);
+            }
+        });
+
+        jCheckBox_SystemApps.setBackground(new java.awt.Color(250, 250, 250));
+        jCheckBox_SystemApps.setForeground(new java.awt.Color(97, 97, 97));
+        jCheckBox_SystemApps.setText("Show system packages");
+        jCheckBox_SystemApps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_SystemAppsActionPerformed(evt);
+            }
+        });
 
         jPanel_Package.setBackground(new java.awt.Color(250, 250, 250));
         jPanel_Package.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -935,32 +1093,49 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(materialButtonH_Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(materialButtonH_Uninstall, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(materialButtonH_PullApk, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(materialButtonH_Backup, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(materialButtonH_Restore, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTableScrollPane_Apps, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                        .addComponent(jTableScrollPane_Apps, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel_Package, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel_Package, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(materialButtonH_Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(materialButtonH_Uninstall, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(materialButtonH_PullApk, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(materialButtonH_Enable, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(materialButtonH_Disable, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(materialButtonH_Backup, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(materialButtonH_Restore, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox_EnabledApps, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_DisabledApps, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox_SystemApps, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(materialButtonH_Uninstall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(materialButtonH_Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(materialButtonH_PullApk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(materialButtonH_Backup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(materialButtonH_Restore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(materialButtonH_Uninstall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(materialButtonH_Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(materialButtonH_PullApk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(materialButtonH_Backup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(materialButtonH_Restore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(materialButtonH_Disable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(materialButtonH_Enable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox_EnabledApps, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox_DisabledApps, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox_SystemApps, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel_Package, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -984,7 +1159,28 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable_AppsFocusGained
 
+    private void jCheckBox_EnabledAppsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_EnabledAppsActionPerformed
+        // save value
+        Settings.set("AppManager_EnabledApps", String.valueOf(jCheckBox_EnabledApps.isSelected()));
+        Settings.save();
+    }//GEN-LAST:event_jCheckBox_EnabledAppsActionPerformed
+
+    private void jCheckBox_DisabledAppsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_DisabledAppsActionPerformed
+        // save value
+        Settings.set("AppManager_DisabledApps", String.valueOf(jCheckBox_DisabledApps.isSelected()));
+        Settings.save();
+    }//GEN-LAST:event_jCheckBox_DisabledAppsActionPerformed
+
+    private void jCheckBox_SystemAppsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_SystemAppsActionPerformed
+        // save value
+        Settings.set("AppManager_SystemApps", String.valueOf(jCheckBox_SystemApps.isSelected()));
+        Settings.save();
+    }//GEN-LAST:event_jCheckBox_SystemAppsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBox_DisabledApps;
+    private javax.swing.JCheckBox jCheckBox_EnabledApps;
+    private javax.swing.JCheckBox jCheckBox_SystemApps;
     private javax.swing.JLabel jLabel_AppIcon;
     private javax.swing.JLabel jLabel_AppLabel;
     private javax.swing.JLabel jLabel_AppPackage;
@@ -998,6 +1194,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     private javax.swing.JScrollPane jTableScrollPane_Apps;
     private javax.swing.JTable jTable_Apps;
     private com.hq.mobydroid.gui.MaterialButtonV materialButtonH_Backup;
+    private com.hq.mobydroid.gui.MaterialButtonV materialButtonH_Disable;
+    private com.hq.mobydroid.gui.MaterialButtonV materialButtonH_Enable;
     private com.hq.mobydroid.gui.MaterialButtonV materialButtonH_PullApk;
     private com.hq.mobydroid.gui.MaterialButtonV materialButtonH_Refresh;
     private com.hq.mobydroid.gui.MaterialButtonV materialButtonH_Restore;

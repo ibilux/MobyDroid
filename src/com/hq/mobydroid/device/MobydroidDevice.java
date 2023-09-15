@@ -138,10 +138,13 @@ public class MobydroidDevice extends JadbDeviceManager {
     /**
      * Fetch installed packages list.
      *
+     * @param enabled
+     * @param disabled
+     * @param system
      * @param taskListener
      */
-    public void runPackagesListTask(TaskListener taskListener) {
-        tasks.add(new TaskPackageMangerList(this, taskListener));
+    public void runPackagesListTask(boolean enabled, boolean disabled, boolean system, TaskListener taskListener) {
+        tasks.add(new TaskPackageMangerList(this, enabled, disabled, system, taskListener));
     }
 
     /**
@@ -160,6 +163,24 @@ public class MobydroidDevice extends JadbDeviceManager {
      */
     public void runPackageUninstallTask(Apkg pkg) {
         tasks.add(new TaskPackageMangerUninstall(this, pkg));
+    }
+
+    /**
+     * Enable package.
+     *
+     * @param pkg
+     */
+    public void runPackageEnableTask(Apkg pkg) {
+        tasks.add(new TaskPackageMangerEnable(this, pkg));
+    }
+
+    /**
+     * Disable package.
+     *
+     * @param pkg
+     */
+    public void runPackageDisableTask(Apkg pkg) {
+        tasks.add(new TaskPackageMangerDisable(this, pkg));
     }
 
     /**

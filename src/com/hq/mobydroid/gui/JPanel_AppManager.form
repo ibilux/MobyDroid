@@ -32,21 +32,30 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="materialButtonH_Refresh" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="materialButtonH_Uninstall" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="materialButtonH_PullApk" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="materialButtonH_Backup" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="materialButtonH_Restore" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jTableScrollPane_Apps" pref="531" max="32767" attributes="0"/>
+                      <Component id="jTableScrollPane_Apps" pref="523" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel_Package" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="materialButtonH_Refresh" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="materialButtonH_Uninstall" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="materialButtonH_PullApk" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="materialButtonH_Enable" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="materialButtonH_Disable" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="materialButtonH_Backup" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="materialButtonH_Restore" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCheckBox_EnabledApps" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
+                          <Component id="jCheckBox_DisabledApps" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
+                          <Component id="jCheckBox_SystemApps" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -56,20 +65,31 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="materialButtonH_Uninstall" alignment="0" max="32767" attributes="0"/>
-                  <Component id="materialButtonH_Refresh" alignment="0" max="32767" attributes="0"/>
-                  <Component id="materialButtonH_PullApk" alignment="0" max="32767" attributes="0"/>
-                  <Component id="materialButtonH_Backup" alignment="0" max="32767" attributes="0"/>
-                  <Component id="materialButtonH_Restore" alignment="0" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="materialButtonH_Uninstall" alignment="0" max="32767" attributes="0"/>
+                      <Component id="materialButtonH_Refresh" alignment="0" max="32767" attributes="0"/>
+                      <Component id="materialButtonH_PullApk" alignment="0" max="32767" attributes="0"/>
+                      <Component id="materialButtonH_Backup" alignment="0" max="32767" attributes="0"/>
+                      <Component id="materialButtonH_Restore" alignment="0" max="32767" attributes="0"/>
+                      <Component id="materialButtonH_Disable" alignment="1" max="32767" attributes="0"/>
+                      <Component id="materialButtonH_Enable" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jCheckBox_EnabledApps" min="-2" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCheckBox_DisabledApps" min="-2" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCheckBox_SystemApps" min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel_Package" max="32767" attributes="0"/>
                   <Component id="jTableScrollPane_Apps" pref="213" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -163,10 +183,38 @@
         <Property name="text" type="java.lang.String" value="Pull Apk"/>
       </Properties>
     </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonV" name="materialButtonH_Enable">
+      <Properties>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;    @Override&#xa;    public void Action() {&#xa;        enableHandle();&#xa;    }&#xa;}" type="code"/>
+        </Property>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.TOGGLE_ON" type="code"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Enable"/>
+      </Properties>
+    </Component>
+    <Component class="com.hq.mobydroid.gui.MaterialButtonV" name="materialButtonH_Disable">
+      <Properties>
+        <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new MaterialButtonAction() {&#xa;    @Override&#xa;    public void Action() {&#xa;        disableHandle();&#xa;    }&#xa;}" type="code"/>
+        </Property>
+        <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="true" type="code"/>
+        </Property>
+        <Property name="icon" type="char" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="MaterialIcons.TOGGLE_OFF" type="code"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Disable"/>
+      </Properties>
+    </Component>
     <Component class="com.hq.mobydroid.gui.MaterialButtonV" name="materialButtonH_Restore">
       <Properties>
         <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;RestoreHandle();&#xa;}&#xa;}" type="code"/>
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;restoreHandle();&#xa;}&#xa;}" type="code"/>
         </Property>
         <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="true" type="code"/>
@@ -180,7 +228,7 @@
     <Component class="com.hq.mobydroid.gui.MaterialButtonV" name="materialButtonH_Refresh">
       <Properties>
         <Property name="action" type="com.hq.mobydroid.gui.MaterialButtonAction" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;RefreshHandle();&#xa;}&#xa;}" type="code"/>
+          <Connection code="new MaterialButtonAction() {&#xa;@Override&#xa;public void Action() {&#xa;refreshHandle();&#xa;}&#xa;}" type="code"/>
         </Property>
         <Property name="focusable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="true" type="code"/>
@@ -190,6 +238,48 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Refresh"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBox_EnabledApps">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fa" green="fa" red="fa" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="61" green="61" red="61" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Show enabled packages"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox_EnabledAppsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBox_DisabledApps">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fa" green="fa" red="fa" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="61" green="61" red="61" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Show disabled packages"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox_DisabledAppsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBox_SystemApps">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fa" green="fa" red="fa" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="61" green="61" red="61" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Show system packages"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox_SystemAppsActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel_Package">
       <Properties>

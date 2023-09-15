@@ -17,7 +17,7 @@ public class ApkgManager extends Apkg {
     }
 
     public ApkgManager(String packageStr, String versionStr, String labelStr, Icon icon, String pathStr, long size, long installTime, boolean mark) {
-        super(packageStr, versionStr, labelStr, icon, pathStr, size, installTime);
+        super(packageStr, versionStr, labelStr, icon, pathStr, size, installTime, false, false);
         this.mark = mark;
     }
 

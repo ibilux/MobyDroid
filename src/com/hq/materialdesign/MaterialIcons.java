@@ -120,6 +120,8 @@ public class MaterialIcons {
     public static final char BOOK = '\uE865';
     public static final char BOOKMARK = '\uE866';
     public static final char BOOKMARK_BORDER = '\uE867';
+    public static final char TOGGLE_ON = '\uE8f4';
+    public static final char TOGGLE_OFF = '\uE8f5';
     public static final char BORDER_ALL = '\uE228';
     public static final char BORDER_BOTTOM = '\uE229';
     public static final char BORDER_CLEAR = '\uE22A';

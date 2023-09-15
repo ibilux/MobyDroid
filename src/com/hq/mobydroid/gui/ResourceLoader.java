@@ -27,6 +27,7 @@ public class ResourceLoader {
     public static final Icon ppt24Icon = new ImageIcon(new ImageIcon(ResourceLoader.class.getResource("/resources/icons/pptx32.png")).getImage().getScaledInstance(18, 24, Image.SCALE_DEFAULT));
     public static final Icon word24Icon = new ImageIcon(new ImageIcon(ResourceLoader.class.getResource("/resources/icons/wordx32.png")).getImage().getScaledInstance(18, 24, Image.SCALE_DEFAULT));
     public static final Icon zip24Icon = new ImageIcon(new ImageIcon(ResourceLoader.class.getResource("/resources/icons/zipx32.png")).getImage().getScaledInstance(18, 24, Image.SCALE_DEFAULT));
+    public static final Icon android32Icon = new ImageIcon(new ImageIcon(ResourceLoader.class.getResource("/resources/icons/androidx32.png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
     public static final Icon MaterialIcons_EDIT = MaterialIcons.buildIcon(MaterialIcons.EDIT, 36, MaterialColor.BLUE_700);
     public static final Icon MaterialIcons_WARNING = MaterialIcons.buildIcon(MaterialIcons.WARNING, 36, MaterialColor.ORANGEA_700);
     public static final Icon MaterialIcons_DELETE_FOREVER = MaterialIcons.buildIcon(MaterialIcons.DELETE_FOREVER, 36, MaterialColor.REDA_700);

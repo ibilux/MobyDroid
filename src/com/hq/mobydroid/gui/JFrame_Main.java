@@ -620,13 +620,13 @@ public class JFrame_Main extends javax.swing.JFrame {
         jButton_Disconnect = new com.hq.mobydroid.gui.MaterialMiniButtonH();
         jPanel_Status = new javax.swing.JPanel();
         jLabel_AdbVersion = new javax.swing.JLabel();
-        jSeparator_vertical1 = new javax.swing.JSeparator();
+        jSeparator_vertical = new javax.swing.JSeparator();
         jProgressBar_Main = new javax.swing.JProgressBar();
         jLabel_MainMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("MobyDroid");
-        setMinimumSize(new java.awt.Dimension(796, 496));
+        setMinimumSize(new java.awt.Dimension(1024, 496));
         setName("MainFrame"); // NOI18N
         setUndecorated(true);
         setSize(new java.awt.Dimension(0, 0));
@@ -719,7 +719,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler.setLayout(jPanel_MainHandlerLayout);
         jPanel_MainHandlerLayout.setHorizontalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
         jPanel_MainHandlerLayout.setVerticalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -962,9 +962,9 @@ public class JFrame_Main extends javax.swing.JFrame {
         jLabel_AdbVersion.setForeground(new java.awt.Color(97, 97, 97));
         jLabel_AdbVersion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        jSeparator_vertical1.setBackground(new java.awt.Color(250, 250, 250));
-        jSeparator_vertical1.setForeground(new java.awt.Color(217, 217, 217));
-        jSeparator_vertical1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator_vertical.setBackground(new java.awt.Color(250, 250, 250));
+        jSeparator_vertical.setForeground(new java.awt.Color(217, 217, 217));
+        jSeparator_vertical.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jProgressBar_Main.setForeground(new java.awt.Color(76, 175, 80));
         jProgressBar_Main.setToolTipText("");
@@ -986,16 +986,16 @@ public class JFrame_Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatusLayout.createSequentialGroup()
                 .addComponent(jProgressBar_Main, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jLabel_MainMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(jLabel_MainMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
-                .addComponent(jSeparator_vertical1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator_vertical, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel_AdbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
         jPanel_StatusLayout.setVerticalGroup(
             jPanel_StatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator_vertical1)
+            .addComponent(jSeparator_vertical)
             .addComponent(jLabel_AdbVersion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jProgressBar_Main, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
             .addComponent(jLabel_MainMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1010,7 +1010,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addComponent(jPanel_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel_MainHandler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel_Status, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+            .addComponent(jPanel_Status, javax.swing.GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
         );
         jPanel_MainPanelLayout.setVerticalGroup(
             jPanel_MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1111,7 +1111,7 @@ public class JFrame_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_TitleBar;
     private javax.swing.JPanel jPanel_Wireless;
     private javax.swing.JProgressBar jProgressBar_Main;
-    private javax.swing.JSeparator jSeparator_vertical1;
+    private javax.swing.JSeparator jSeparator_vertical;
     private javax.swing.JTextField jTextField_Host;
     // End of variables declaration//GEN-END:variables
 }
