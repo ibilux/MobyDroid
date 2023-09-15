@@ -183,11 +183,19 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
             disableUI();
             //
             File[] files = fileChooser.getSelectedFiles();
+            boolean onsdcard = jCheckBox_Onsdcard.isSelected();
+            boolean reinstall = jCheckBox_Reinstall.isSelected();
+            boolean downgrade = jCheckBox_Downgrade.isSelected();
+            if (!Boolean.valueOf(Settings.get("Expert_Settings"))) {
+                onsdcard = false;
+                reinstall = false;
+                downgrade = false;
+            }
             for (File file : files) {
                 try {
                     Apkg pkg = ApkTool.getPackage(file.getAbsolutePath());
                     if (pkg != null) {
-                        packageTableModel.addPackage(new ApkgInstaller(pkg, jCheckBox_Onsdcard.isSelected(), jCheckBox_Reinstall.isSelected(), jCheckBox_Downgrade.isSelected()));
+                        packageTableModel.addPackage(new ApkgInstaller(pkg, onsdcard, reinstall, downgrade));
                     }
                 } catch (ApkToolException | IOException ex) {
                     Log.log(Level.SEVERE, "ApkToolGetPackage", ex);
@@ -310,13 +318,16 @@ public class JPanel_AppInstaller extends javax.swing.JPanel {
                         Object transferableArrayListObj = dtde.getTransferable().getTransferData(dragAndDropPanelFlavor);
                         if (transferableArrayListObj != null) {
                             if (transferableArrayListObj instanceof ArrayList) {
+                                final boolean onsdcard = Boolean.valueOf(Settings.get("Expert_Settings")) ? jCheckBox_Onsdcard.isSelected() : false;
+                                final boolean reinstall = Boolean.valueOf(Settings.get("Expert_Settings")) ? jCheckBox_Reinstall.isSelected() : false;
+                                final boolean downgrade = Boolean.valueOf(Settings.get("Expert_Settings")) ? jCheckBox_Downgrade.isSelected() : false;
                                 ((ArrayList) transferableArrayListObj).forEach(file -> {
                                     if (file instanceof File) {
                                         String filePath = ((File) file).getAbsolutePath();
                                         try {
                                             Apkg pkg = ApkTool.getPackage(filePath);
                                             if (pkg != null) {
-                                                packageTableModel.addPackage(new ApkgInstaller(pkg, jCheckBox_Onsdcard.isSelected(), jCheckBox_Reinstall.isSelected(), jCheckBox_Downgrade.isSelected()));
+                                                packageTableModel.addPackage(new ApkgInstaller(pkg, onsdcard, reinstall, downgrade));
                                             }
                                         } catch (ApkToolException | IOException ex) {
                                             Log.log(Level.SEVERE, "ApkToolGetPackage", ex);
