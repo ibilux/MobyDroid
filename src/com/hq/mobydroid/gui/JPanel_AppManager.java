@@ -291,8 +291,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jCheckBox_DisabledApps.setEnabled(false);
         jCheckBox_SystemApps.setEnabled(false);
         // disable buttons
-        materialButtonH_Disable.setEnabled(true);
-        materialButtonH_Enable.setEnabled(true);
+        materialButtonH_Disable.setEnabled(false);
+        materialButtonH_Enable.setEnabled(false);
         materialButtonH_Backup.setEnabled(false);
         materialButtonH_PullApk.setEnabled(false);
         materialButtonH_Refresh.setEnabled(false);
