@@ -1,8 +1,6 @@
 package com.hq.mobydroid.device;
 
 import com.hq.jadb.MyFile;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -15,16 +13,20 @@ public abstract class FileBrowserAbstract {
     private final FileBrowserListener fileBrowserListener;
     private List<MyFile> src;
     private MyFile dst;
-    protected Path path;
+    protected String path;
 
     FileBrowserAbstract(FileBrowserListener fileBrowserListener) {
         this.fileBrowserListener = fileBrowserListener;
-        path = Paths.get("");
+        path = "";
     }
 
     public abstract List<MyFile> goTo(String path);
 
     public abstract List<MyFile> list(String path);
+
+    public abstract String getParent();
+
+    public abstract String resolvePath(String name);
 
     public abstract boolean rename(String src, String dst);
 
@@ -36,16 +38,8 @@ public abstract class FileBrowserAbstract {
 
     public abstract boolean copy(String src, String dst);
 
-    public String getParent() {
-        Path parent = path.getParent();
-        if (parent == null) {
-            return "";
-        }
-        return parent.toString();
-    }
-
     public String getPath() {
-        return path.toString();
+        return path;
     }
 
     public void onCopy(List<MyFile> src) {
@@ -54,7 +48,7 @@ public abstract class FileBrowserAbstract {
     }
 
     public void onPaste() {
-        this.dst = new MyFile(path.toString(), (0x1 << 14), 0, 0);
+        this.dst = new MyFile(path, (0x1 << 14), 0, 0);
         fileBrowserListener.onPaste(this);
     }
 
@@ -68,9 +62,5 @@ public abstract class FileBrowserAbstract {
 
     public MyFile getDst() {
         return dst;
-    }
-
-    public String resolvePath(String name) {
-        return path.resolve(name).toString();
     }
 }

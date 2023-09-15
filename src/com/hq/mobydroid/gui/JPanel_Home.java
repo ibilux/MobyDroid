@@ -48,7 +48,7 @@ public class JPanel_Home extends javax.swing.JPanel {
 
         jLabel_AndroLabel.setForeground(new java.awt.Color(139, 195, 74));
         jLabel_AndroLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_AndroLabel.setText("MobyDroid v0.4");
+        jLabel_AndroLabel.setText("MobyDroid v0.5");
 
         jLabel_About.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_About.setText("Bilux (i.bilux@gmail.com)");

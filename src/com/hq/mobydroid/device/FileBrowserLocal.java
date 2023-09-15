@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,12 @@ public class FileBrowserLocal extends FileBrowserAbstract {
     @Override
     public List<MyFile> goTo(String path) {
         if (path.isEmpty()) {
-            this.path = Paths.get(MobydroidStatic.HOME_PATH);
+            this.path = Paths.get(MobydroidStatic.HOME_PATH).toString();
         } else {
-            this.path = Paths.get(path);
+            this.path = path;
         }
 
-        return list(this.path.toString());
+        return list(this.path);
     }
 
     @Override
@@ -53,6 +54,20 @@ public class FileBrowserLocal extends FileBrowserAbstract {
             }
         }
         return list;
+    }
+
+    @Override
+    public String getParent() {
+        Path parent = Paths.get(this.path).getParent();
+        if (parent == null) {
+            return "";
+        }
+        return parent.toString();
+    }
+
+    @Override
+    public String resolvePath(String name) {
+        return Paths.get(this.path).resolve(name).toString();
     }
 
     @Override

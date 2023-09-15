@@ -315,7 +315,7 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
                 } catch (InterruptedException ex) {
                 }*/
                 // get files list
-                List<MyFile> list = fileBrowserAbstract.goTo(path.replace('\\', '/')); // work around path escape bug
+                List<MyFile> list = fileBrowserAbstract.goTo(path);
 
                 // publish
                 list.forEach((file) -> {
