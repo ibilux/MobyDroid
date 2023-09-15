@@ -100,7 +100,7 @@ public class MobydroidDevice extends JadbDeviceManager {
      * @return
      */
     public float getTasksProgress() {
-        Stream<TaskWorker> stream = tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.PENDING || taskWorker.getStatus() == TaskWorker.Status.STARTED || taskWorker.getStatus() == TaskWorker.Status.DONE));
+        Stream<TaskWorker> stream = tasks.stream().filter((taskWorker) -> (taskWorker.getStatus() == TaskWorker.Status.PENDING || taskWorker.getStatus() == TaskWorker.Status.STARTED));
         OptionalDouble average = stream.mapToDouble(taskWorker -> taskWorker.getProgress()).average();
 
         try {
