@@ -798,6 +798,19 @@ public class JPanel_AppManager extends javax.swing.JPanel {
             jLabel_Package.setText(pkg.getPackage());
             jLabel_Icon.setIcon(pkg.getIcon());
 
+            if (pkg.isEnabled()) {
+                if (pkg.isSystem()) {
+                    jLabel_Label.setForeground(MaterialColor.REDA_700);
+                    jLabel_Package.setForeground(MaterialColor.REDA_400);
+                } else {
+                    jLabel_Label.setForeground(MaterialColor.GREEN_500);
+                    jLabel_Package.setForeground(MaterialColor.LIGHTGREEN_500);
+                }
+            } else {
+                jLabel_Label.setForeground(MaterialColor.GREY_700);
+                jLabel_Package.setForeground(MaterialColor.GREY_500);
+            }
+
             if (hasFocus) {
                 jpanel.setBorder(javax.swing.BorderFactory.createLineBorder(MaterialColor.BLUE_400));
             } else {
