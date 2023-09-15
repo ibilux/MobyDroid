@@ -1,6 +1,5 @@
 package com.hq.mobydroid.device;
 
-import com.hq.apktool.Apkg;
 import com.hq.jadb.engine.JadbException;
 import com.hq.jadb.manager.JadbDevicePackages;
 import com.hq.materialdesign.MaterialColor;
@@ -17,7 +16,7 @@ import javax.swing.Icon;
  *
  * @author Bilux (i.bilux@gmail.com)
  */
-public class TaskPackageMangerList extends TaskWorker<Void, Apkg> {
+public class TaskPackageMangerList extends TaskWorker<Void, ApkgManager> {
 
     private final TaskListener taskListener;
     private static final Icon icon = MaterialIcons.buildIcon(MaterialIcons.ANDROID, 24, MaterialColor.AMBERA_100);
@@ -96,22 +95,22 @@ public class TaskPackageMangerList extends TaskWorker<Void, Apkg> {
         int pkgs_size = user_enabled.size() + user_disabled.size() + system_enabled.size() + system_disabled.size();
         // enabled third party apps
         for (Map.Entry<String, String> pkg : user_enabled.entrySet()) {
-            publish(device.getPackageDetails(pkg.getKey(), pkg.getValue(), true, false)); // get package details and publish it
+            publish(new ApkgManager(device.getPackageDetails(pkg.getKey(), pkg.getValue()), false, true, false)); // get package details and publish it
             setProgress(10 + ((counter++) * (100 - 10) / pkgs_size)); // set progress
         }
         // disabled third party apps
         for (Map.Entry<String, String> pkg : user_disabled.entrySet()) {
-            publish(device.getPackageDetails(pkg.getKey(), pkg.getValue(), false, false)); // get package details and publish it
+            publish(new ApkgManager(device.getPackageDetails(pkg.getKey(), pkg.getValue()), false, false, false)); // get package details and publish it
             setProgress(10 + ((counter++) * (100 - 10) / pkgs_size)); // set progress
         }
         // enabled system apps
         for (Map.Entry<String, String> pkg : system_enabled.entrySet()) {
-            publish(device.getPackageDetails(pkg.getKey(), pkg.getValue(), true, true)); // get package details and publish it
+            publish(new ApkgManager(device.getPackageDetails(pkg.getKey(), pkg.getValue()), false, true, true)); // get package details and publish it
             setProgress(10 + ((counter++) * (100 - 10) / pkgs_size)); // set progress
         }
         // disabled system apps
         for (Map.Entry<String, String> pkg : system_disabled.entrySet()) {
-            publish(device.getPackageDetails(pkg.getKey(), pkg.getValue(), false, true)); // get package details and publish it
+            publish(new ApkgManager(device.getPackageDetails(pkg.getKey(), pkg.getValue()), false, false, true)); // get package details and publish it
             setProgress(10 + ((counter++) * (100 - 10) / pkgs_size)); // set progress
         }
 

@@ -11,14 +11,18 @@ import javax.swing.Icon;
 public class ApkgManager extends Apkg {
 
     private boolean mark;
+    private final boolean enabled;
+    private final boolean system;
 
-    public ApkgManager(Apkg pkg, boolean mark) {
-        this(pkg.getPackage(), pkg.getVersion(), pkg.getLabel(), pkg.getIcon(), pkg.getPath(), pkg.getSize(), pkg.getInstallTime(), mark);
+    public ApkgManager(Apkg pkg, boolean mark, boolean enabled, boolean system) {
+        this(pkg.getPackage(), pkg.getVersion(), pkg.getLabel(), pkg.getIcon(), pkg.getPath(), pkg.getSize(), pkg.getInstallTime(), enabled, system, mark);
     }
 
-    public ApkgManager(String packageStr, String versionStr, String labelStr, Icon icon, String pathStr, long size, long installTime, boolean mark) {
-        super(packageStr, versionStr, labelStr, icon, pathStr, size, installTime, false, false);
+    public ApkgManager(String packageStr, String versionStr, String labelStr, Icon icon, String pathStr, long size, long installTime, boolean enabled, boolean system, boolean mark) {
+        super(packageStr, versionStr, labelStr, icon, pathStr, size, installTime);
         this.mark = mark;
+        this.enabled = enabled;
+        this.system = system;
     }
 
     public void setMark(boolean mark) {
@@ -27,5 +31,13 @@ public class ApkgManager extends Apkg {
 
     public boolean isMarked() {
         return mark;
+    }
+
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public boolean isSystem() {
+        return this.system;
     }
 }

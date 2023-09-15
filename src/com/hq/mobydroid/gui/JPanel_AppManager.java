@@ -5,7 +5,6 @@
  */
 package com.hq.mobydroid.gui;
 
-import com.hq.apktool.Apkg;
 import com.hq.materialdesign.MaterialColor;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.MobyDroid;
@@ -316,7 +315,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
             disabled = false;
             system = false;
         }
-        MobyDroid.getDevice().runPackagesListTask(enabled, disabled, system, new TaskListener<Apkg>() {
+        MobyDroid.getDevice().runPackagesListTask(enabled, disabled, system, new TaskListener<ApkgManager>() {
             @Override
             public void onStart() {
                 // disable UI
@@ -327,9 +326,9 @@ public class JPanel_AppManager extends javax.swing.JPanel {
             }
 
             @Override
-            public void onProcess(List<Apkg> list) {
+            public void onProcess(List<ApkgManager> list) {
                 list.forEach((pkg) -> {
-                    packageTableModel.addPackage(new ApkgManager(pkg, false));
+                    packageTableModel.addPackage(pkg);
                 });
             }
 
@@ -468,7 +467,9 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jLabel_AppPackage.setText(pkgManager.getPackage());
         jLabel_AppVersion.setText("Version: " + pkgManager.getVersion());
         jLabel_AppSize.setText("Size: " + GuiUtils.getFormatedSize(pkgManager.getSize()));
-        jLabel_Install.setText("Marked: " + (pkgManager.isMarked() ? "Yes" : "No"));
+        jLabel_Marked.setText("Marked: " + (pkgManager.isMarked() ? "Yes" : "No"));
+        jLabel_Enabled.setText("Enabled: " + (pkgManager.isEnabled() ? "Yes" : "No"));
+        jLabel_System.setText("System: " + (pkgManager.isSystem() ? "Yes" : "No"));
     }
 
     /**
@@ -792,7 +793,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Apkg pkg = (Apkg) value;
+            ApkgManager pkg = (ApkgManager) value;
             jLabel_Label.setText(pkg.getLabel());
             jLabel_Package.setText(pkg.getPackage());
             jLabel_Icon.setIcon(pkg.getIcon());
@@ -873,10 +874,9 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jLabel_AppPackage = new javax.swing.JLabel();
         jLabel_AppVersion = new javax.swing.JLabel();
         jLabel_AppSize = new javax.swing.JLabel();
-        jLabel_Install = new javax.swing.JLabel();
-        jLabel_OnSDCard = new javax.swing.JLabel();
-        jLabel_Reinstall = new javax.swing.JLabel();
-        jLabel_Downgrade = new javax.swing.JLabel();
+        jLabel_Marked = new javax.swing.JLabel();
+        jLabel_Enabled = new javax.swing.JLabel();
+        jLabel_System = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(250, 250, 250));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Install New Apps : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 11))); // NOI18N
@@ -1024,21 +1024,17 @@ public class JPanel_AppManager extends javax.swing.JPanel {
         jLabel_AppSize.setFocusable(false);
         jLabel_AppSize.setOpaque(true);
 
-        jLabel_Install.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel_Install.setFocusable(false);
-        jLabel_Install.setOpaque(true);
+        jLabel_Marked.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_Marked.setFocusable(false);
+        jLabel_Marked.setOpaque(true);
 
-        jLabel_OnSDCard.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel_OnSDCard.setFocusable(false);
-        jLabel_OnSDCard.setOpaque(true);
+        jLabel_Enabled.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_Enabled.setFocusable(false);
+        jLabel_Enabled.setOpaque(true);
 
-        jLabel_Reinstall.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel_Reinstall.setFocusable(false);
-        jLabel_Reinstall.setOpaque(true);
-
-        jLabel_Downgrade.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel_Downgrade.setFocusable(false);
-        jLabel_Downgrade.setOpaque(true);
+        jLabel_System.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel_System.setFocusable(false);
+        jLabel_System.setOpaque(true);
 
         javax.swing.GroupLayout jPanel_PackageLayout = new javax.swing.GroupLayout(jPanel_Package);
         jPanel_Package.setLayout(jPanel_PackageLayout);
@@ -1047,6 +1043,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
             .addGroup(jPanel_PackageLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(jPanel_PackageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_System, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_AppVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_PackageLayout.createSequentialGroup()
                         .addComponent(jLabel_AppIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1055,11 +1053,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                             .addComponent(jLabel_AppPackage, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel_AppLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel_AppSize, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_OnSDCard, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Reinstall, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Downgrade, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Install, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1))
+                    .addComponent(jLabel_Marked, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel_PackageLayout.setVerticalGroup(
             jPanel_PackageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1075,14 +1070,12 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_AppSize, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_Install, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_Marked, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_OnSDCard, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_Reinstall, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_Downgrade, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel_System, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1093,7 +1086,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTableScrollPane_Apps, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                        .addComponent(jTableScrollPane_Apps, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel_Package, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -1139,7 +1132,7 @@ public class JPanel_AppManager extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel_Package, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTableScrollPane_Apps, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+                    .addComponent(jTableScrollPane_Apps, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1186,10 +1179,9 @@ public class JPanel_AppManager extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel_AppPackage;
     private javax.swing.JLabel jLabel_AppSize;
     private javax.swing.JLabel jLabel_AppVersion;
-    private javax.swing.JLabel jLabel_Downgrade;
-    private javax.swing.JLabel jLabel_Install;
-    private javax.swing.JLabel jLabel_OnSDCard;
-    private javax.swing.JLabel jLabel_Reinstall;
+    private javax.swing.JLabel jLabel_Enabled;
+    private javax.swing.JLabel jLabel_Marked;
+    private javax.swing.JLabel jLabel_System;
     private javax.swing.JPanel jPanel_Package;
     private javax.swing.JScrollPane jTableScrollPane_Apps;
     private javax.swing.JTable jTable_Apps;

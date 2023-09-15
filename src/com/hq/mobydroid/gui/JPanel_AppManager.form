@@ -32,7 +32,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jTableScrollPane_Apps" pref="523" max="32767" attributes="0"/>
+                      <Component id="jTableScrollPane_Apps" pref="512" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel_Package" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -87,7 +87,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel_Package" max="32767" attributes="0"/>
-                  <Component id="jTableScrollPane_Apps" pref="213" max="32767" attributes="0"/>
+                  <Component id="jTableScrollPane_Apps" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -306,6 +306,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel_System" min="-2" pref="252" max="-2" attributes="0"/>
+                      <Component id="jLabel_Enabled" min="-2" pref="252" max="-2" attributes="0"/>
                       <Component id="jLabel_AppVersion" min="-2" pref="252" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jLabel_AppIcon" min="-2" pref="36" max="-2" attributes="0"/>
@@ -316,12 +318,9 @@
                           </Group>
                       </Group>
                       <Component id="jLabel_AppSize" min="-2" pref="252" max="-2" attributes="0"/>
-                      <Component id="jLabel_OnSDCard" min="-2" pref="252" max="-2" attributes="0"/>
-                      <Component id="jLabel_Reinstall" min="-2" pref="252" max="-2" attributes="0"/>
-                      <Component id="jLabel_Downgrade" min="-2" pref="252" max="-2" attributes="0"/>
-                      <Component id="jLabel_Install" min="-2" pref="252" max="-2" attributes="0"/>
+                      <Component id="jLabel_Marked" min="-2" pref="252" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -341,14 +340,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel_AppSize" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel_Install" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jLabel_Marked" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel_OnSDCard" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jLabel_Enabled" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel_Reinstall" min="-2" pref="15" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel_Downgrade" min="-2" pref="15" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel_System" min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace pref="69" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -394,7 +391,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel_Install">
+        <Component class="javax.swing.JLabel" name="jLabel_Marked">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="0"/>
@@ -403,7 +400,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel_OnSDCard">
+        <Component class="javax.swing.JLabel" name="jLabel_Enabled">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="0"/>
@@ -412,16 +409,7 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel_Reinstall">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="0"/>
-            </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel_Downgrade">
+        <Component class="javax.swing.JLabel" name="jLabel_System">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="0"/>

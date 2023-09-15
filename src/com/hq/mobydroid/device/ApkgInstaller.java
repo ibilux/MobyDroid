@@ -19,7 +19,7 @@ public class ApkgInstaller extends Apkg {
     }
 
     public ApkgInstaller(String packageStr, String versionStr, String labelStr, Icon icon, String pathStr, long size, long installTime, boolean onsdcard, boolean reinstall, boolean downgrade) {
-        super(packageStr, versionStr, labelStr, icon, pathStr, size, installTime, false, false);
+        super(packageStr, versionStr, labelStr, icon, pathStr, size, installTime);
         this.onsdcard = onsdcard;
         this.reinstall = reinstall;
         this.downgrade = downgrade;
