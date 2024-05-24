@@ -274,10 +274,6 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
         fileBrowserAbstract.rename(file.getPath(), file.resolveName(input.toString()));
     }
 
-    private void surootHandle() {
-
-    }
-
     private boolean isFileSelected() {
         if (jTable_Browser.getSelectedRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Please select files for operation.", "No files selected", JOptionPane.OK_OPTION, ResourceLoader.MaterialIcons_WARNING);

@@ -34,5 +34,6 @@ public class ResourceLoader {
     public static final Icon MaterialIcons_CREATE_NEW_FOLDER = MaterialIcons.buildIcon(MaterialIcons.CREATE_NEW_FOLDER, 36, MaterialColor.BLUE_700);
     public static final Icon MaterialIcons_NOTE_ADD = MaterialIcons.buildIcon(MaterialIcons.NOTE_ADD, 36, MaterialColor.BLUE_700);
     public static final Icon MaterialIcons_PHONE_ANDROID = MaterialIcons.buildIcon(MaterialIcons.PHONE_ANDROID, 36, MaterialColor.TEAL_500);
+    public static final Icon MaterialIcons_USER = MaterialIcons.buildIcon(MaterialIcons.ACCOUNT_CIRCLE, 36, MaterialColor.TEAL_500);
 
 }

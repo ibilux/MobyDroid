@@ -210,7 +210,7 @@ public class JPanel_Settings extends javax.swing.JPanel {
     private void jCheckBox_SuRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_SuRootActionPerformed
         if (jCheckBox_SuRoot.isSelected()) {
             // show warning
-            int result = JOptionPane.showConfirmDialog(this, "Su Root permission is dangder and for exprets only!\nAre you sure you want to activate it?", "Su Root Permission", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, ResourceLoader.MaterialIcons_WARNING);
+            int result = JOptionPane.showConfirmDialog(this, "Su Root permission is danger and for experts only!\nAre you sure you want to activate it?", "Su Root Permission", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, ResourceLoader.MaterialIcons_WARNING);
             if (result == JOptionPane.YES_OPTION) {
                 jCheckBox_SuRoot.setSelected(true);
             } else {

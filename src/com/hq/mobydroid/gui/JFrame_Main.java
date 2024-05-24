@@ -6,6 +6,7 @@ import com.hq.jadb.engine.JadbDeviceWatcherListener;
 import com.hq.jadb.engine.JadbException;
 import com.hq.jadb.engine.JadbStatics;
 import com.hq.jadb.manager.JadbDeviceProperties;
+import com.hq.jadb.manager.UserInfo;
 import com.hq.materialdesign.MaterialColor;
 import com.hq.materialdesign.MaterialIcons;
 import com.hq.mobydroid.Log;
@@ -55,7 +56,9 @@ public class JFrame_Main extends javax.swing.JFrame {
     private final ButtonMouseListener buttonMouseListener = new ButtonMouseListener();
     private final JadbDeviceWatcherListener devicesWatcher;
     private final List<MobydroidDevice> mDevices = new ArrayList<>();
+    private final List<UserInfo> mUsers = new ArrayList<>();
     private MobydroidDevice mDevice;
+    private UserInfo mUser;
     // *****************************************************************
 
     /**
@@ -361,13 +364,29 @@ public class JFrame_Main extends javax.swing.JFrame {
 
     // ************************************************************* //
     // ************************************************************* //
-    public class ComboBoxRenderar extends JLabel implements ListCellRenderer {
+    public class ComboBoxRenderar_Devices extends JLabel implements ListCellRenderer {
 
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             setBackground(isSelected ? MaterialColor.TEAL_100 : list.getBackground());
             setOpaque(isSelected);
             setIcon(ResourceLoader.MaterialIcons_PHONE_ANDROID);
+            setText((String) value);
+            setFont(list.getFont());
+            return this;
+        }
+
+    }
+
+    // ************************************************************* //
+    // ************************************************************* //
+    public class ComboBoxRenderar_Users extends JLabel implements ListCellRenderer {
+
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            setBackground(isSelected ? MaterialColor.TEAL_100 : list.getBackground());
+            setOpaque(isSelected);
+            setIcon(ResourceLoader.MaterialIcons_USER);
             setText((String) value);
             setFont(list.getFont());
             return this;
@@ -618,6 +637,8 @@ public class JFrame_Main extends javax.swing.JFrame {
         jFormattedTextField_Port = new javax.swing.JFormattedTextField();
         jButton_Connect = new com.hq.mobydroid.gui.MaterialMiniButtonH();
         jButton_Disconnect = new com.hq.mobydroid.gui.MaterialMiniButtonH();
+        jPanel_User = new javax.swing.JPanel();
+        jComboBox_Users = new javax.swing.JComboBox<>();
         jPanel_Status = new javax.swing.JPanel();
         jLabel_AdbVersion = new javax.swing.JLabel();
         jSeparator_vertical = new javax.swing.JSeparator();
@@ -719,11 +740,11 @@ public class JFrame_Main extends javax.swing.JFrame {
         jPanel_MainHandler.setLayout(jPanel_MainHandlerLayout);
         jPanel_MainHandlerLayout.setHorizontalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGap(0, 741, Short.MAX_VALUE)
         );
         jPanel_MainHandlerLayout.setVerticalGroup(
             jPanel_MainHandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 538, Short.MAX_VALUE)
+            .addGap(0, 595, Short.MAX_VALUE)
         );
 
         jPanel_Button.setBackground(new java.awt.Color(250, 250, 250));
@@ -734,7 +755,7 @@ public class JFrame_Main extends javax.swing.JFrame {
         jComboBox_Devices.setForeground(new java.awt.Color(97, 97, 97));
         jComboBox_Devices.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
         jComboBox_Devices.setPreferredSize(new java.awt.Dimension(36, 28));
-        jComboBox_Devices.setRenderer(new ComboBoxRenderar());
+        jComboBox_Devices.setRenderer(new ComboBoxRenderar_Devices());
         jComboBox_Devices.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox_DevicesItemStateChanged(evt);
@@ -890,7 +911,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                         .addComponent(jFormattedTextField_Port, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_WirelessLayout.createSequentialGroup()
                         .addComponent(jButton_Connect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(jButton_Disconnect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel_WirelessLayout.setVerticalGroup(
@@ -904,6 +925,34 @@ public class JFrame_Main extends javax.swing.JFrame {
                     .addComponent(jButton_Connect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Disconnect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+        );
+
+        jPanel_User.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel_User.setBorder(javax.swing.BorderFactory.createTitledBorder("User:"));
+
+        jComboBox_Users.setBackground(new java.awt.Color(250, 250, 250));
+        jComboBox_Users.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jComboBox_Users.setForeground(new java.awt.Color(97, 97, 97));
+        jComboBox_Users.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
+        jComboBox_Users.setPreferredSize(new java.awt.Dimension(36, 28));
+        jComboBox_Users.setRenderer(new ComboBoxRenderar_Users());
+        jComboBox_Users.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_UsersItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_UserLayout = new javax.swing.GroupLayout(jPanel_User);
+        jPanel_User.setLayout(jPanel_UserLayout);
+        jPanel_UserLayout.setHorizontalGroup(
+            jPanel_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jComboBox_Users, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_UserLayout.setVerticalGroup(
+            jPanel_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_UserLayout.createSequentialGroup()
+                .addComponent(jComboBox_Users, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_ButtonLayout = new javax.swing.GroupLayout(jPanel_Button);
@@ -924,6 +973,7 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jButton_SuRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel_Wireless, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_User, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_ButtonLayout.setVerticalGroup(
             jPanel_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -933,6 +983,8 @@ public class JFrame_Main extends javax.swing.JFrame {
                     .addComponent(jButton_SuRoot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_Wireless, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Home, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -949,9 +1001,11 @@ public class JFrame_Main extends javax.swing.JFrame {
                 .addComponent(jButton_Terminal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jButton_Settings, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jButton_TaskManager, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jPanel_User.getAccessibleContext().setAccessibleName("User:");
 
         jPanel_Status.setBackground(new java.awt.Color(250, 250, 250));
         jPanel_Status.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 217, 217)));
@@ -1066,6 +1120,22 @@ public class JFrame_Main extends javax.swing.JFrame {
                 } catch (JadbException | IOException ex) {
                     Log.log(Level.SEVERE, "CheckBinaries", ex);
                 }
+                // get users list from the device
+                try {
+                    // clear users list
+                    mUser = null;
+                    mUsers.clear();
+                    jComboBox_Users.removeAllItems();
+                    // get users list
+                    mUsers.addAll(mDevice.users());
+                    mUsers.forEach(user -> {
+                        // add device to comboBox
+                        String userName = "<html><b>" + user.getUserName() + "</b><br>User " + user.getUserId() + "</html>";
+                        jComboBox_Users.addItem(userName);
+                    });
+                } catch (JadbException | IOException ex) {
+                    Log.log(Level.SEVERE, "Users", ex);
+                }
                 // start tasks runner
                 mDevice.startTasksRunner();
                 // set this device as the selected device
@@ -1073,6 +1143,18 @@ public class JFrame_Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jComboBox_DevicesItemStateChanged
+
+    private void jComboBox_UsersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_UsersItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            int selectedUser = jComboBox_Users.getSelectedIndex();
+            if (selectedUser >= 0) {
+                // get selected device
+                mUser = mUsers.get(selectedUser);
+                // set this device as the selected device
+                mDevice.setUserId(mUser.getUserId());
+            }
+        }
+    }//GEN-LAST:event_jComboBox_UsersItemStateChanged
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // exit handle
@@ -1100,6 +1182,7 @@ public class JFrame_Main extends javax.swing.JFrame {
     private com.hq.mobydroid.gui.MaterialButtonH jButton_TaskManager;
     private com.hq.mobydroid.gui.MaterialButtonH jButton_Terminal;
     private javax.swing.JComboBox<String> jComboBox_Devices;
+    private javax.swing.JComboBox<String> jComboBox_Users;
     private javax.swing.JFormattedTextField jFormattedTextField_Port;
     private javax.swing.JLabel jLabel_AdbVersion;
     private javax.swing.JLabel jLabel_MainLabel;
@@ -1109,6 +1192,7 @@ public class JFrame_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_MainPanel;
     private javax.swing.JPanel jPanel_Status;
     private javax.swing.JPanel jPanel_TitleBar;
+    private javax.swing.JPanel jPanel_User;
     private javax.swing.JPanel jPanel_Wireless;
     private javax.swing.JProgressBar jProgressBar_Main;
     private javax.swing.JSeparator jSeparator_vertical;
