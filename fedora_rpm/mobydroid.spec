@@ -1,6 +1,6 @@
 %define _binaries_in_noarch_packages_terminate_build   0
 Name:           mobydroid
-Version:        0.6
+Version:        0.7
 Release:        1%{?dist}
 Summary:        GUI for Android SDK/ADB
 BuildArch:	noarch
@@ -49,6 +49,7 @@ install -Dm755 %{SOURCE3} %{buildroot}%{_bindir}/mobydroid
 
 
 %changelog
+* Fri May 24 2024 bilux <i.bilux@gmail.com> 0.7-1
 * Fri Sep 15 2023 bilux <i.bilux@gmail.com> 0.6-1
 * Thu Apr 29 2021 bilux <i.bilux@gmail.com> 0.4-1
 * Wed May  6 2020 bilux <i.bilux@gmail.com> 0.3-1

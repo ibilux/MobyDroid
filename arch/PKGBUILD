@@ -2,7 +2,7 @@
 # Maintainer: bilux <i.bilux@gmail.com>
 
 pkgname=mobydroid
-pkgver=0.6
+pkgver=0.7
 pkgrel=1
 arch=('any')
 pkgdesc="GUI for Android SDK/ADB, Android phone manager"
