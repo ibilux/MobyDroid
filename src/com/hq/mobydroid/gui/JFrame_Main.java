@@ -190,28 +190,34 @@ public class JFrame_Main extends javax.swing.JFrame {
         // process new devices list
         devices.values().forEach((device) -> {
             MobydroidDevice jadbdevice = new MobydroidDevice(device);
-            if (!mDevices.contains(jadbdevice)) {
-                // add device to mDevices list
-                mDevices.add(jadbdevice);
-                // add device to comboBox
-                String deviceName;
-                try {
-                    JadbDeviceProperties jadbDeviceProperties = jadbdevice.getDeviceProperties();
-                    deviceName = "<html><b>";
-                    deviceName += jadbDeviceProperties.getProductManufacturer();
-                    deviceName += "</b><br>";
-                    if (jadbDeviceProperties.getProductModel().length() > 20) {
-                        deviceName += jadbDeviceProperties.getProductModel().substring(0, 20);
-                    } else {
-                        deviceName += jadbDeviceProperties.getProductModel();
-                    }
-                    deviceName += "</html>";
-                } catch (IOException | JadbException ex) {
-                    deviceName = jadbdevice.getSerial() + " (Unknown)";
-                    Log.log(Level.SEVERE, "GetDeviceProperties", ex);
-                }
-                jComboBox_Devices.addItem(deviceName);
+            if (mDevices.contains(jadbdevice)) {
+                // get mDevice index in the list
+                int deviceIndex = mDevices.indexOf(jadbdevice);
+                // remove mDevice from mDevices list
+                mDevices.remove(deviceIndex);
+                // remove mDevice from comboBox
+                jComboBox_Devices.removeItemAt(deviceIndex);
             }
+            // add device to mDevices list
+            mDevices.add(jadbdevice);
+            // add device to comboBox
+            String deviceName;
+            try {
+                JadbDeviceProperties jadbDeviceProperties = jadbdevice.getDeviceProperties();
+                deviceName = "<html><b>";
+                deviceName += jadbDeviceProperties.getProductManufacturer();
+                deviceName += "</b><br>";
+                if (jadbDeviceProperties.getProductModel().length() > 20) {
+                    deviceName += jadbDeviceProperties.getProductModel().substring(0, 20);
+                } else {
+                    deviceName += jadbDeviceProperties.getProductModel();
+                }
+                deviceName += "</html>";
+            } catch (IOException | JadbException ex) {
+                deviceName = jadbdevice.getSerial() + " (Unknown)";
+                Log.log(Level.SEVERE, "GetDeviceProperties", ex);
+            }
+            jComboBox_Devices.addItem(deviceName);
         });
 
         // remove ejected devices from mDevices list
@@ -222,6 +228,14 @@ public class JFrame_Main extends javax.swing.JFrame {
                     int deviceIndex = mDevices.indexOf(jadbdevice);
                     // remove mDevice from mDevices list
                     mDevices.remove(deviceIndex);
+                    // clear users if the ejected device is the selected one
+                    int selectedDevice = jComboBox_Devices.getSelectedIndex();
+                    if (selectedDevice >= 0 && selectedDevice == deviceIndex) {
+                        // clear users list
+                        mUser = null;
+                        mUsers.clear();
+                        jComboBox_Users.removeAllItems();
+                    }
                     // remove mDevice from comboBox
                     jComboBox_Devices.removeItemAt(deviceIndex);
                 }
