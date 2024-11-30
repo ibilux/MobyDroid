@@ -77,8 +77,8 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
         // set Table Row Sorter
         TableRowSorter tableRowSorter = new PackageTableRowSorter(jTable_Apps.getModel());
+        tableRowSorter.setComparator(3, (Comparator<Long>) (o1, o2) -> o1.compareTo(o2));
         jTable_Apps.setRowSorter(tableRowSorter);
-        tableRowSorter.setComparator(2, (Comparator<Long>) (o1, o2) -> o1.compareTo(o2));
 
         // set table header for  0nd column
         jTable_Apps.getColumnModel().getColumn(jTable_Apps.convertColumnIndexToView(0)).setHeaderRenderer(new JCheckBoxTableHeaderCellRenderer());
@@ -122,7 +122,11 @@ public class JPanel_AppManager extends javax.swing.JPanel {
 
         // set table selection listner
         listSelectionListener = (ListSelectionEvent lse) -> {
-            setPackageDetails(packageTableModel.getPackage(jTable_Apps.getSelectionModel().getLeadSelectionIndex()));
+            int viewIndex = jTable_Apps.getSelectionModel().getLeadSelectionIndex();
+            if (viewIndex != -1) { // Ensure a row is selected
+                int modelIndex = jTable_Apps.convertRowIndexToModel(viewIndex); // Convert view index to model index
+                setPackageDetails(packageTableModel.getPackage(modelIndex));
+            }
         };
         jTable_Apps.getSelectionModel().addListSelectionListener(listSelectionListener);
 

@@ -34,7 +34,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.RowFilter;
-import javax.swing.RowSorter;
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -111,7 +110,7 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
         tableRowSorter.setComparator(5, (Comparator<Integer>) (o1, o2) -> o1.compareTo(o2));
 
         // Sorting by multiple columns (folders first)
-        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        //List<RowSorter.SortKey> sortKeys = new ArrayList<>();
 
         // add table filter for search
         tableFilter = "";
@@ -508,7 +507,7 @@ public class JPanel_FileBrowser extends javax.swing.JPanel {
         }
 
         public void addFile(List<MyFile> files) {
-            int row = getRowCount();
+            //int row = getRowCount();
             this.files.addAll(files);
             //fireTableRowsInserted(row, getRowCount() - 1);
             fireTableDataChanged();
