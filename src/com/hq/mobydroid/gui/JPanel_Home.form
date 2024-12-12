@@ -70,7 +70,7 @@
           <Color blue="4a" green="c3" red="8b" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="MobyDroid v0.7"/>
+        <Property name="text" type="java.lang.String" value="MobyDroid v0.7.2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel_About">
